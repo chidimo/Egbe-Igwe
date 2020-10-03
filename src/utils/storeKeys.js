@@ -1,0 +1,1 @@
+export const WA_WEATHER_DATA = 'WA_WEATHER_DATA';

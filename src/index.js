@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import { NotesProvider } from './context/NotesCtx';
+import { NotesProvider } from './components/context/NotesCtx';
 import { CitiesProvider } from './components/city/context/CitiesCtx';
-import { UsersProvider } from './context/UsersCtx';
 import { WeatherProvider } from './components/city/context/WeatherCtx';
+import { UsersProvider } from './context/UsersCtx';
 
 import './index.css';
 

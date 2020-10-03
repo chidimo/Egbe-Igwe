@@ -8,7 +8,7 @@ export const Search = () => {
       <input
         className="search-cities"
         type="text"
-        placeholder="Find a city..."
+        placeholder="Find your city..."
         onChange={() => {
           console.log('searching');
         }}
