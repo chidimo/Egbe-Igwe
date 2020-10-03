@@ -11,8 +11,8 @@ export const Home = () => {
   const wDispatch = useWeatherDispatch();
 
   React.useEffect(() => {
-    cities.slice(1, 3).forEach(city => {
-      getCurrentCityWeather("New York")(wDispatch)
+    cities.slice(0, 3).forEach(city => {
+      getCurrentCityWeather(city.Name)(wDispatch)
     });
   }, [ cities, wDispatch ]) 
 
