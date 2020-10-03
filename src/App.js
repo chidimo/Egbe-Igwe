@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { setupAxios } from "./axiosSetup";
+import { Home } from "./components/home/Home";
+import { Search } from "./components/search/Search";
+import { useCitiesDispatch } from "./components/city/context/useCities";
+import { worldCities } from "./data/cities";
+import "./App.scss";
 
-function App() {
+setupAxios()
+console.log('CODESANDBOX_SSE', process.env.CODESANDBOX_SSE)
+
+export default function App() {
+  const citiesDispatch = useCitiesDispatch();
+
+  React.useEffect(() => {
+    citiesDispatch({ type: "GET_CITIES", cities: worldCities.slice(0, 15) });
+  }, [ citiesDispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search />
+      <Home />
     </div>
   );
 }
-
-export default App;

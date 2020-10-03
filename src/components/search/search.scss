@@ -1,0 +1,24 @@
+.search {
+  width: 100%;
+  margin-bottom: 10px;
+
+  .search-cities {
+    width: 100%;
+    padding: 7px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid gray;
+
+    @media (min-width: 768px) {
+      width: 80%;
+    }
+
+    &:focus {
+      outline: none;
+      border-color:orange;
+      box-shadow: -3px 3px 6px 0px #a79f9f;
+    }
+  }
+
+
+}

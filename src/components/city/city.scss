@@ -1,0 +1,36 @@
+.city-card {
+  p {
+    margin: 0;
+  }
+
+  border: 1px solid orange;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: -3px 3px 6px 0px #a79f9f;
+
+  .name-section {
+  padding: 5px;
+  text-align: center;
+  }
+
+  .name-section .weather-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+
+  .delist-city {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background: #f4f4f4;
+    color: white;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+}
