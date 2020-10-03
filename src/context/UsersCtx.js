@@ -9,18 +9,15 @@ export const initState = {
   cities: [],
 };
 
-export const reducer = (action, state={}) => {
-    switch (action.type) {
-      default:
-        break;
-    }
+export const reducer = (action, state = {}) => {
+  switch (action.type) {
+    default:
+      break;
   }
+};
 
 export const UsersProvider = ({ children }) => {
-  const [ notes, notesDisp ] = React.useReducer(
-    reducer,
-    initState
-  );
+  const [notes, notesDisp] = React.useReducer(reducer, initState);
 
   return (
     <UsersStateCtx.Provider value={notes}>

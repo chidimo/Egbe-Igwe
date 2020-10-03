@@ -1,7 +1,6 @@
 {
-    "template": "node",
-    "infiniteLoopProtection": true,
-    "hardReloadOnChange": true,
-    "view": "browser"
-  }
-  
+  "template": "node",
+  "infiniteLoopProtection": true,
+  "hardReloadOnChange": true,
+  "view": "browser"
+}

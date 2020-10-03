@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
-import { NotesProvider } from "./context/NotesCtx";
-import { CitiesProvider } from "./components/city/context/CitiesCtx";
-import { UsersProvider } from "./context/UsersCtx";
-import { WeatherProvider } from "./components/city/context/WeatherCtx";
+import App from './App';
+import { NotesProvider } from './context/NotesCtx';
+import { CitiesProvider } from './components/city/context/CitiesCtx';
+import { UsersProvider } from './context/UsersCtx';
+import { WeatherProvider } from './components/city/context/WeatherCtx';
 
-import './index.css'
+import './index.css';
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,5 +23,5 @@ ReactDOM.render(
       </CitiesProvider>
     </WeatherProvider>
   </React.StrictMode>,
-  rootElement
+  rootElement,
 );

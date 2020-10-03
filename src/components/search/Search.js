@@ -1,11 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import "./search.scss";
+import './search.scss';
 
 export const Search = () => {
   return (
     <div className="search">
-      <input className='search-cities' type="text" placeholder='Find a city...' onChange={() => {console.log('searching')}} />
+      <input
+        className="search-cities"
+        type="text"
+        placeholder="Find a city..."
+        onChange={() => {
+          console.log('searching');
+        }}
+      />
     </div>
   );
 };

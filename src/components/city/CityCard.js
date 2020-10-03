@@ -1,40 +1,43 @@
-import React from "react";
-import { IconSet } from "../IconSet";
+import React from 'react';
+import { IconSet } from '../IconSet';
 
-import { DELIST_CITY } from "./aTypes";
-import "./city.scss";
-import { useCitiesDispatch } from "./context/useCities";
-import { useWeatherState } from "./context/useWeather";
+import { DELIST_CITY } from './aTypes';
+import './city.scss';
+import { useCitiesDispatch } from './context/useCities';
+import { useWeatherState } from './context/useWeather';
 
 export const CityCard = (props) => {
   const { city } = props;
   const { rank, Name } = city;
-  const citiesDispatch = useCitiesDispatch();
   const wInfo = useWeatherState();
+  const citiesDispatch = useCitiesDispatch();
 
-  const { current } = wInfo[Name] || {
+  const {
+    current: { temperature: celsius, weather_icons },
+  } = wInfo[Name] || {
     current: {
-      temperature: "",
+      temperature: 0,
       weather_icons: [
-        "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
-      ]
-    }
+        'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png',
+      ],
+    },
   };
-  
-  console.log('current', current);
+  const fahrenheit = (celsius * 1.8 + 32).toFixed(2);
 
   return (
     <div className="city-card">
       <div className="name-section">
         <p>
-          {Name}{" "}
+          {Name}{' '}
           <img
             className="weather-icon"
-            src={current.weather_icons[0]}
+            src={weather_icons[0]}
             alt="Weather icon"
-          />{" "}
+          />{' '}
         </p>
-        <p>{current.temperature} &#8451; 21 &#x2109;</p>
+        <p>
+          {celsius} &#8451; | {fahrenheit} &#x2109;
+        </p>
       </div>
 
       <div className="delist-city">

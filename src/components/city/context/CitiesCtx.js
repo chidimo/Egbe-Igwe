@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { DELIST_CITY, GET_CITIES } from "../aTypes";
+import { DELIST_CITY, GET_CITIES } from '../aTypes';
 
 export const CitiesStateCtx = React.createContext({});
 export const CitiesDispatchCtx = React.createContext({});
 
 export const initState = {
-  cities: [], 
+  cities: [],
 };
 
 export const reducer = (state = {}, action) => {
@@ -17,7 +17,7 @@ export const reducer = (state = {}, action) => {
     case DELIST_CITY:
       return {
         ...state,
-        cities: state.cities.filter((ct) => ct.rank !== action.rank)
+        cities: state.cities.filter((ct) => ct.rank !== action.rank),
       };
     default:
       break;
@@ -37,5 +37,5 @@ export const CitiesProvider = ({ children }) => {
 };
 
 CitiesProvider.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object,
 };

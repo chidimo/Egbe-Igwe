@@ -1,19 +1,19 @@
-import React from "react";
-import { setupAxios } from "./axiosSetup";
-import { Home } from "./components/home/Home";
-import { Search } from "./components/search/Search";
-import { useCitiesDispatch } from "./components/city/context/useCities";
-import { worldCities } from "./data/cities";
-import "./App.scss";
+import React from 'react';
+import { setupAxios } from './axiosSetup';
+import { Home } from './components/home/Home';
+import { Search } from './components/search/Search';
+import { useCitiesDispatch } from './components/city/context/useCities';
+import { worldCities } from './data/cities';
+import './App.scss';
 
-setupAxios()
+setupAxios();
 
 export default function App() {
   const citiesDispatch = useCitiesDispatch();
 
   React.useEffect(() => {
-    citiesDispatch({ type: "GET_CITIES", cities: worldCities.slice(0, 15) });
-  }, [ citiesDispatch]);
+    citiesDispatch({ type: 'GET_CITIES', cities: worldCities.slice(0, 15) });
+  }, [citiesDispatch]);
 
   return (
     <div className="App">
