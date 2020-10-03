@@ -12,7 +12,7 @@ export const Home = () => {
 
   React.useEffect(() => {
     cities.slice(1, 3).forEach(city => {
-      getCurrentCityWeather(city.Name)(wDispatch)
+      getCurrentCityWeather("New York")(wDispatch)
     });
   }, [ cities, wDispatch ]) 
 

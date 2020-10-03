@@ -7,7 +7,6 @@ import { worldCities } from "./data/cities";
 import "./App.scss";
 
 setupAxios()
-console.log('CODESANDBOX_SSE', process.env.CODESANDBOX_SSE)
 
 export default function App() {
   const citiesDispatch = useCitiesDispatch();
