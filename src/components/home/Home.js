@@ -4,9 +4,10 @@ import { CityCard } from '../city/CityCard';
 
 import { useCitiesState } from '../city/context/useCities';
 import { useWeatherDispatch } from '../city/context/useWeather';
+import { Search } from '../search/Search';
 import './home.scss';
 
-export const Home = () => {
+const Home = () => {
   const { cities } = useCitiesState();
   const wDispatch = useWeatherDispatch();
 
@@ -17,22 +18,27 @@ export const Home = () => {
   }, [cities, wDispatch]);
 
   return (
-    <div className="home">
-      <div className="cities-section">
-        {cities.length === 0 ? (
-          <p>No cities to display</p>
-        ) : (
-          <>
-            {cities
-              .sort((a, b) =>
-                a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
-              )
-              .map((city) => {
-                return <CityCard key={city.rank} city={city} />;
-              })}
-          </>
-        )}
+    <div>
+      <Search />
+      <div className="home">
+        <div className="cities-section">
+          {cities.length === 0 ? (
+            <p>No cities to display</p>
+          ) : (
+            <>
+              {cities
+                .sort((a, b) =>
+                  a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
+                )
+                .map((city) => {
+                  return <CityCard key={city.rank} city={city} />;
+                })}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
 };
+
+export default Home;

@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import { NotesProvider } from './components/context/NotesCtx';
+import { NotesProvider } from './components/notes/context/NotesCtx';
 import { CitiesProvider } from './components/city/context/CitiesCtx';
 import { WeatherProvider } from './components/city/context/WeatherCtx';
-import { UsersProvider } from './context/UsersCtx';
+import { UserProvider } from './components/auth/context/UserCtx';
 
 import './index.css';
 
@@ -16,9 +16,9 @@ ReactDOM.render(
     <WeatherProvider>
       <CitiesProvider>
         <NotesProvider>
-          <UsersProvider>
+          <UserProvider>
             <App />
-          </UsersProvider>
+          </UserProvider>
         </NotesProvider>
       </CitiesProvider>
     </WeatherProvider>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GET_W_DATA } from '../city/aTypes';
-import { WA_WEATHER_DATA } from '../../utils/storeKeys';
+import { GET_W_DATA } from '../aTypes';
+import { WA_WEATHER_DATA } from '../../../utils/storeKeys';
 
 export const WeatherStateCtx = React.createContext({});
 export const WeatherDispatchCtx = React.createContext({});

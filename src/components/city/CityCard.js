@@ -1,12 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { IconSet } from '../IconSet';
 
 import { DELIST_CITY } from './aTypes';
-import './city.scss';
+import './city-card.scss';
 import { useCitiesDispatch } from './context/useCities';
 import { useWeatherState } from './context/useWeather';
 
 export const CityCard = (props) => {
+  const history = useHistory();
   const { city } = props;
   const { rank, Name } = city;
   const wInfo = useWeatherState();
@@ -25,7 +27,12 @@ export const CityCard = (props) => {
   const fahrenheit = (celsius * 1.8 + 32).toFixed(2);
 
   return (
-    <div className="city-card">
+    <div
+      className="city-card"
+      onClick={() => {
+        history.push({ pathname: `/city/${Name}` });
+      }}
+    >
       <div className="city-cart--1-3">
         <div className="name-section">
           <p className="city-name">{Name}</p>

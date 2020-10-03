@@ -3,3 +3,16 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+input {
+  padding: 7px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid gray;
+
+  &:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: -3px 3px 6px 0px #a79f9f;
+  }
+}
