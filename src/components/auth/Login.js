@@ -2,7 +2,7 @@ import React from 'react';
 
 import './auth.scss';
 import { useUserDispatch } from './context/useUsers';
-import { SET_USER } from './aTypes';
+import { LOGIN } from './aTypes';
 
 const Login = () => {
   const userDispatch = useUserDispatch();
@@ -12,7 +12,7 @@ const Login = () => {
     if (!username) {
       alert('Please enter a username');
     } else {
-      userDispatch({ type: SET_USER, username });
+      userDispatch({ type: LOGIN, username });
     }
   };
 
@@ -25,7 +25,7 @@ const Login = () => {
           <input
             type="text"
             value={username}
-            placeholder="Enter an username"
+            placeholder="Enter a username"
             onChange={(e) => setUsername(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -35,7 +35,7 @@ const Login = () => {
           />
         </div>
         <button className="pointer" onClick={() => submit()}>
-          Submit
+          Login
         </button>
       </div>
     </div>

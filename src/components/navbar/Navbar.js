@@ -19,7 +19,7 @@ export const Navbar = () => {
         </div>
 
         <div className="right-side">
-          <div>
+          <div className="username">
             <Link to={'/notes'}>{username}</Link>
           </div>
 

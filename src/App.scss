@@ -3,9 +3,14 @@
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  color: #07f;
+}
+
 .main-app {
   padding: 0 15px;
-  padding-top: 110px;
+  padding-top: 120px;
 }
 
 @media (min-width: 400px) {

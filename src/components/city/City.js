@@ -102,7 +102,7 @@ const City = () => {
         />
 
         {cityNotes?.length === 0 ? (
-          <p>You have not saved any notes for {Name}</p>
+          <p>Add your first note for {Name}</p>
         ) : (
           <>
             {cityNotes?.map((n) => {

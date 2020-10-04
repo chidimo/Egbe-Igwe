@@ -22,12 +22,16 @@ const NoteIndex = () => {
 
       <div>
         {myNotes?.length === 0 ? (
-          <p>You have not saved any notes</p>
+          <p>Visit a city page to create some notes</p>
         ) : (
           <>
-            {myNotes?.map((n) => {
-              return <Note key={n.id} note={n} />;
-            })}
+            {myNotes
+              ?.sort((a, b) =>
+                a.city.localeCompare(b.city, { sensitivity: 'base' }),
+              )
+              .map((n) => {
+                return <Note key={n.id} note={n} indexPage={true} />;
+              })}
           </>
         )}
       </div>

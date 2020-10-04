@@ -1,42 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LIKE_CITY, LOAD_USER, LOGOUT, SET_USER, UNLIKE_CITY } from '../aTypes';
-import { WA_USERNAME } from '../../../utils/storeKeys';
+import { LIKE_CITY, LOAD_USER, LOGOUT, LOGIN, UNLIKE_CITY } from '../aTypes';
+import { WA_LIKED_CITIES, WA_USERNAME } from '../../../utils/storeKeys';
 
 export const UserStateCtx = React.createContext({});
 export const UserDispatchCtx = React.createContext({});
 
 export const initState = {
-  username: 'chidimo',
+  username: '',
   likedCities: [],
 };
 
 export const reducer = (state = {}, action) => {
+  const lCities = JSON.parse(localStorage.getItem(WA_LIKED_CITIES)) || {};
   switch (action.type) {
-    case LOAD_USER:
-      const ls = JSON.parse(localStorage.getItem(WA_USERNAME));
-      return ls;
-    case SET_USER:
-      const u = { ...state, username: action.username };
-      localStorage.setItem(WA_USERNAME, JSON.stringify(u));
+    case LOAD_USER: {
+      const username = JSON.parse(localStorage.getItem(WA_USERNAME)) || '';
+      const userLikes = lCities[username];
+      const u1 = { ...state, username, likedCities: userLikes || [] };
+      return u1;
+    }
+    case LOGIN: {
+      const userLikes = lCities[action.username];
+      const u = {
+        ...state,
+        username: action.username,
+        likedCities: userLikes || [],
+      };
+      localStorage.setItem(WA_USERNAME, JSON.stringify(action.username));
       return u;
-    case LIKE_CITY:
-      const u2 = {
-        ...state,
-        likedCities: state.likedCities.concat(action.Name),
-      };
-      localStorage.setItem(WA_USERNAME, JSON.stringify(u2));
+    }
+    case LIKE_CITY: {
+      const existingLikes = lCities[state.username] || [];
+      existingLikes.push(action.Name);
+      lCities[state.username] = existingLikes;
+
+      const u2 = { ...state, likedCities: existingLikes };
+      localStorage.setItem(WA_LIKED_CITIES, JSON.stringify(lCities));
       return u2;
-    case UNLIKE_CITY:
-      const u3 = {
-        ...state,
-        likedCities: state.likedCities.filter((lc) => lc !== action.Name),
-      };
-      localStorage.setItem(WA_USERNAME, JSON.stringify(u3));
+    }
+    case UNLIKE_CITY: {
+      const existingLikes = lCities[state.username];
+      const updated = existingLikes.filter((lc) => lc !== action.Name);
+      lCities[state.username] = updated;
+      const u3 = { ...state, likedCities: updated };
+      localStorage.setItem(WA_LIKED_CITIES, JSON.stringify(lCities));
       return u3;
+    }
     case LOGOUT:
-      // localStorage.removeItem(WA_USERNAME);
-      return { ...state, username: '' };
+      localStorage.removeItem(WA_USERNAME);
+      return initState;
     default:
       break;
   }
@@ -44,6 +57,7 @@ export const reducer = (state = {}, action) => {
 
 export const UserProvider = ({ children }) => {
   const [user, userDispatch] = React.useReducer(reducer, initState);
+  console.log(user);
   return (
     <UserStateCtx.Provider value={user}>
       <UserDispatchCtx.Provider value={userDispatch}>

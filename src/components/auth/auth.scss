@@ -5,6 +5,10 @@
   align-items: center;
   height: 100vh;
 
+  .login-page {
+    padding: 0 10px;
+  }
+
   @media (min-width: 680px) {
     .login-page {
       width: 450px;

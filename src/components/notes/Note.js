@@ -7,9 +7,10 @@ import './note.scss';
 import { useNotesDispatch } from './context/useNotes';
 import { DELETE_NOTE } from './aTypes';
 import { useUserState } from '../auth/context/useUsers';
+import { Link } from 'react-router-dom';
 
 export const Note = (props) => {
-  const { note } = props;
+  const { note, indexPage } = props;
 
   const { saveNote } = useSaveNote();
   const { username } = useUserState();
@@ -64,6 +65,12 @@ export const Note = (props) => {
               }}
             />
           </div>
+
+          {indexPage && (
+            <div className="extra-info">
+              <Link to={`/city/${note.city}`}>{note.city}</Link>
+            </div>
+          )}
         </div>
       )}
     </div>
