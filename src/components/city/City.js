@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { WA_WEATHER_DATA } from '../../utils/storeKeys';
-import { getCurrentCityWeather } from './actions';
+// import { getCurrentCityWeather } from './actions';
 import { useWeatherDispatch, useWeatherState } from './context/useWeather';
 import { useNotesDispatch, useNotesState } from '../notes/context/useNotes';
 import { useUserState } from '../auth/context/useUsers';
@@ -22,6 +22,10 @@ const City = () => {
   const notesDispatch = useNotesDispatch();
   const myNotes = notes[username];
 
+  const cityNotes = myNotes
+    ?.sort((a, b) => b.id - a.id)
+    .filter((nt) => nt.city === Name);
+
   const [text, setText] = React.useState('');
 
   const cityData =
@@ -34,7 +38,7 @@ const City = () => {
   }, [notesDispatch, username]);
 
   React.useEffect(() => {
-    getCurrentCityWeather(Name)(wDispatch);
+    // getCurrentCityWeather(Name)(wDispatch);
   }, [Name, wDispatch]);
 
   return (
@@ -55,7 +59,7 @@ const City = () => {
         <div>
           <button
             onClick={() => {
-              saveNote(undefined, text);
+              saveNote(undefined, text, Name);
               setText('');
             }}
           >
@@ -64,12 +68,16 @@ const City = () => {
         </div>
       </div>
 
-      <div className="notes-list">
-        {myNotes
-          ?.sort((a, b) => b.id - a.id)
-          .map((n) => {
-            return <Note key={n.id} note={n} />;
-          })}
+      <div className="city-notes-list">
+        {cityNotes?.length === 0 ? (
+          <p>You have not saved any notes for {Name}</p>
+        ) : (
+          <>
+            {cityNotes?.map((n) => {
+              return <Note key={n.id} note={n} />;
+            })}
+          </>
+        )}
       </div>
     </div>
   );

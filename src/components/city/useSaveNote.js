@@ -6,7 +6,7 @@ export const useSaveNote = () => {
   const { username } = useUserState();
   const notesDispatch = useNotesDispatch();
 
-  const saveNote = (id, text) => {
+  const saveNote = (id, text, Name) => {
     console.log(id, text);
     switch (true) {
       case text.length < 3:
@@ -16,7 +16,7 @@ export const useSaveNote = () => {
         alert('Note is too long');
         return;
       case id === undefined:
-        notesDispatch({ type: NEW_NOTE, text, username });
+        notesDispatch({ type: NEW_NOTE, text, username, Name });
         return;
       default:
         notesDispatch({

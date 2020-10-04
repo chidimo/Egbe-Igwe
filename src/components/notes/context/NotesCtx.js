@@ -30,7 +30,11 @@ export const reducer = (state = {}, action) => {
       return state;
     case NEW_NOTE: {
       const userNotes = state[action.username] || [];
-      userNotes.push({ id: userNotes.length + 1, text: action.text });
+      userNotes.push({
+        id: userNotes.length + 1,
+        text: action.text,
+        city: action.Name,
+      });
       const updated = { ...state, [action.username]: userNotes };
       localStorage.setItem(WA_NOTES, JSON.stringify(updated));
       return updated;

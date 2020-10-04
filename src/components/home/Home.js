@@ -12,7 +12,7 @@ const Home = () => {
   const wDispatch = useWeatherDispatch();
 
   React.useEffect(() => {
-    cities.slice(0, 15).forEach((city) => {
+    cities.slice(0, 0).forEach((city) => {
       getCurrentCityWeather(city.Name)(wDispatch);
     });
   }, [cities, wDispatch]);
