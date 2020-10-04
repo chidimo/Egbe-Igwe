@@ -15,10 +15,11 @@ export const CityCard = (props) => {
   const citiesDispatch = useCitiesDispatch();
 
   const {
-    current: { temperature: celsius, weather_icons },
+    current: { temperature: celsius, weather_icons, observation_time },
   } = wInfo[Name] || {
     current: {
       temperature: 20,
+      observation_time: '',
       weather_icons: [
         'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png',
       ],
@@ -61,6 +62,7 @@ export const CityCard = (props) => {
         </p>
         <p className="minor-temp">{fahrenheit} &#x2109;</p>
       </div>
+      <p>Prevailing conditions at {observation_time}</p>
     </div>
   );
 };

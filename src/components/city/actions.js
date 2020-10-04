@@ -11,7 +11,6 @@ export const getCurrentCityWeather = (Name) => async (dispatch) => {
     if (data.current) {
       dispatch({ type: GET_W_DATA, Name, data });
     }
-    localStorage.setItem('WEATEHR', JSON.stringify(data));
     return { success: true };
   } catch (e) {
     const { response } = e;

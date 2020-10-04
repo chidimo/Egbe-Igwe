@@ -6,18 +6,23 @@ import { worldCities } from './data/cities';
 import './App.scss';
 import { Routes } from './components/routes/Routes';
 import Login from './components/auth/Login';
+import { GET_CITIES, LOAD_CACHED_WEATHER } from './components/city/aTypes';
+import { useWeatherDispatch } from './components/city/context/useWeather';
 
 setupAxios();
 
 export default function App() {
   const { username } = useUserState();
+  const wDispatch = useWeatherDispatch();
   const citiesDispatch = useCitiesDispatch();
 
   React.useEffect(() => {
-    citiesDispatch({ type: 'GET_CITIES', cities: worldCities.slice(0, 15) });
-  }, [citiesDispatch]);
+    wDispatch({ type: LOAD_CACHED_WEATHER });
+  }, [wDispatch]);
 
-  console.log('usernamne', username);
+  React.useEffect(() => {
+    citiesDispatch({ type: GET_CITIES, cities: worldCities.slice(0, 15) });
+  }, [citiesDispatch]);
 
   return (
     <div className="App">

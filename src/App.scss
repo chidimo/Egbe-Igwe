@@ -4,7 +4,8 @@
   text-align: center;
 }
 
-input {
+input,
+textarea {
   padding: 7px;
   font-size: 18px;
   border-radius: 6px;
@@ -15,4 +16,17 @@ input {
     border-color: orange;
     box-shadow: -3px 3px 6px 0px #a79f9f;
   }
+}
+
+button {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  background-color: #07f;
+  box-shadow: -3px 3px 6px 0px #a79f9f;
 }

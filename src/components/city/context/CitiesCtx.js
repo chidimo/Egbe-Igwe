@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { DELIST_CITY, GET_CITIES } from '../aTypes';
+import { WA_CITIES } from '../../../utils/storeKeys';
 
 export const CitiesStateCtx = React.createContext({});
 export const CitiesDispatchCtx = React.createContext({});
@@ -12,8 +13,11 @@ export const initState = {
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
-    case GET_CITIES:
-      return { ...state, cities: action.cities };
+    case GET_CITIES: {
+      const updated = { ...state, cities: action.cities };
+      localStorage.setItem(WA_CITIES, JSON.stringify(updated));
+      return updated;
+    }
     case DELIST_CITY:
       return {
         ...state,
