@@ -27,15 +27,17 @@ export const CityCard = (props) => {
   const fahrenheit = (celsius * 1.8 + 32).toFixed(2);
 
   return (
-    <div
-      className="city-card"
-      onClick={() => {
-        history.push({ pathname: `/city/${Name}` });
-      }}
-    >
+    <div className="city-card">
       <div className="city-cart--1-3">
         <div className="name-section">
-          <p className="city-name">{Name}</p>
+          <p
+            className="city-name"
+            onClick={() => {
+              history.push({ pathname: `/city/${Name}` });
+            }}
+          >
+            {Name}
+          </p>
 
           <div className="close-container">
             <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>

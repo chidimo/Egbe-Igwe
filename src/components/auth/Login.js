@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <div className='login-page'>
+      <div className="login-page">
         <h2>Enter a username to continue</h2>
 
         <div className="div-input">
