@@ -18,24 +18,22 @@ const Home = () => {
   }, [cities, wDispatch]);
 
   return (
-    <div>
+    <div className="direct-main-child home-container">
       <Search />
-      <div className="home">
-        <div className="cities-section">
-          {cities.length === 0 ? (
-            <p>No cities to display</p>
-          ) : (
-            <>
-              {cities
-                .sort((a, b) =>
-                  a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
-                )
-                .map((city) => {
-                  return <CityCard key={city.rank} city={city} />;
-                })}
-            </>
-          )}
-        </div>
+      <div className="cities-section">
+        {cities.length === 0 ? (
+          <p>No cities to display</p>
+        ) : (
+          <>
+            {cities
+              .sort((a, b) =>
+                a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
+              )
+              .map((city) => {
+                return <CityCard key={city.rank} city={city} />;
+              })}
+          </>
+        )}
       </div>
     </div>
   );

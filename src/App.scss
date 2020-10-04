@@ -9,14 +9,21 @@ a {
 }
 
 .main-app {
-  padding: 0 15px;
-  padding-top: 120px;
+  margin: auto;
+  padding: 120px 15px 40px;
 }
 
-@media (min-width: 400px) {
-  .main-app {
-    padding-top: 85px;
+$i: 500;
+@while $i < 1500 {
+  @media (min-width: #{$i}px) {
+    $rem: ($i - 400)/2;
+    .main-app {
+      padding-left: #{$rem}px;
+      padding-right: #{$rem}px;
+    }
   }
+
+  $i: $i + 100;
 }
 
 .pointer {
@@ -26,7 +33,6 @@ a {
 input,
 textarea {
   height: 3em;
-  // width: 15em;
   width: 100%;
   resize: none;
   padding: 5px 10px;
@@ -47,6 +53,7 @@ textarea.disabled {
 }
 
 button {
+  width: 100%;
   color: white;
   font-weight: bold;
   text-transform: uppercase;

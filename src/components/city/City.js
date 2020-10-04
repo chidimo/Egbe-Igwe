@@ -56,7 +56,7 @@ const City = () => {
   }, [Name, wDispatch]);
 
   return (
-    <div className="city-page">
+    <div className="direct-main-child city-page">
       <h2 className="city-country-name">
         {Name}, {location.country}{' '}
         {likedCities.includes(Name) ? (

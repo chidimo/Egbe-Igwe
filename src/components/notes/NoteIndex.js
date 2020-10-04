@@ -17,7 +17,7 @@ const NoteIndex = () => {
   }, [notesDispatch, username]);
 
   return (
-    <div className="city-page">
+    <div className="direct-main-child notes-page">
       <h2>My notes</h2>
 
       <div>
