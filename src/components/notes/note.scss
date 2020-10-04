@@ -1,0 +1,29 @@
+.note-container {
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  position: relative;
+  background-color: #f5f3f3;
+
+  button {
+    width: 100%;
+    margin: 8px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .note-container {
+    width: 60%;
+  }
+}
+
+.textarea-container {
+  width: 90%;
+}
+
+.note-view {
+  padding: 10px;
+  box-shadow: -3px 3px 6px 0px #a79f9f;
+}

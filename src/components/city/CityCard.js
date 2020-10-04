@@ -32,7 +32,7 @@ export const CityCard = (props) => {
       <div className="city-cart--1-3">
         <div className="name-section">
           <p
-            className="city-name"
+            className="city-name pointer"
             onClick={() => {
               history.push({ pathname: `/city/${Name}` });
             }}
@@ -40,9 +40,9 @@ export const CityCard = (props) => {
             {Name}
           </p>
 
-          <div className="close-container">
+          <div className="close-container pointer">
             <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>
-              <IconSet name="cancel" color="maroon" size="1.5rem" />
+              <IconSet name="cancel" color="red" size="1.7rem" />
             </span>
           </div>
         </div>

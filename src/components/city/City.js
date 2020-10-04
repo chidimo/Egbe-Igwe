@@ -4,14 +4,25 @@ import { WA_WEATHER_DATA } from '../../utils/storeKeys';
 // import { getCurrentCityWeather } from './actions';
 import { useWeatherDispatch, useWeatherState } from './context/useWeather';
 import { useNotesDispatch, useNotesState } from '../notes/context/useNotes';
-import { useUserState } from '../auth/context/useUsers';
+import { useUserDispatch, useUserState } from '../auth/context/useUsers';
 import { LOAD_NOTES } from '../notes/aTypes';
 import { Note } from '../notes/Note';
 import { useSaveNote } from './useSaveNote';
+import { NoteEditor } from '../notes/NoteEditor';
+import { useCitiesDispatch, useCitiesState } from './context/useCities';
+import { formatAsNumber } from '../../utils/formatters';
+import './city.scss';
+import { GET_CITY } from './aTypes';
+import { IconSet } from '../IconSet';
+import { LIKE_CITY, UNLIKE_CITY } from '../auth/aTypes';
 
 const City = () => {
   const { Name } = useParams();
-  const { username } = useUserState();
+  const { username, likedCities } = useUserState();
+  const userDispatch = useUserDispatch();
+
+  const { currentCity } = useCitiesState();
+  const citiesDispatch = useCitiesDispatch();
 
   const wInfo = useWeatherState();
   const wDispatch = useWeatherDispatch();
@@ -23,15 +34,20 @@ const City = () => {
   const myNotes = notes[username];
 
   const cityNotes = myNotes
-    ?.sort((a, b) => b.id - a.id)
-    .filter((nt) => nt.city === Name);
+    // ?.sort((a, b) => b.id - a.id)
+    ?.filter((nt) => nt.city === Name);
 
   const [text, setText] = React.useState('');
 
-  const cityData =
-    wInfo || JSON.parse(localStorage.getItem(WA_WEATHER_DATA)) || {};
-  const currentCity = cityData[Name] || { location: {} };
-  const { location } = currentCity;
+  const cityData = wInfo || JSON.parse(localStorage.getItem(WA_WEATHER_DATA));
+  const cityWInfo = cityData[Name] || { location: {} };
+  const { location } = cityWInfo;
+
+  console.log(likedCities);
+
+  React.useEffect(() => {
+    citiesDispatch({ type: GET_CITY, Name });
+  }, [Name, citiesDispatch]);
 
   React.useEffect(() => {
     notesDispatch({ type: LOAD_NOTES, username });
@@ -42,33 +58,51 @@ const City = () => {
   }, [Name, wDispatch]);
 
   return (
-    <div>
-      <h3>
-        City of {Name}, {location.country}
-      </h3>
-
-      <div className="city-info">About city</div>
-
-      <div className="note-editor">
-        <textarea
-          value={text}
-          placeholder="Enter notes"
-          onChange={(e) => setText(e.target.value)}
-        />
-
-        <div>
-          <button
+    <div className="city-page">
+      <h2>
+        About {Name}, {location.country}{' '}
+        {likedCities.includes(Name) ? (
+          <span
+            className="pointer"
             onClick={() => {
-              saveNote(undefined, text, Name);
-              setText('');
+              userDispatch({ type: UNLIKE_CITY, Name });
             }}
           >
-            Save
-          </button>
+            <IconSet name="like" size={'1.7rem'} />
+          </span>
+        ) : (
+          <span
+            className="pointer"
+            onClick={() => {
+              userDispatch({ type: LIKE_CITY, Name });
+            }}
+          >
+            <IconSet name="unlike" size={'1.7rem'} />
+          </span>
+        )}
+      </h2>
+
+      <div className="city-info">
+        <p>Population: {formatAsNumber(currentCity.Population)}</p>
+        <p>
+          Latitude {location.lat}, Longitude {location.lon}
+        </p>
+        <p>Local time: {location.localtime}</p>
+        <div>
+          <p>Current weather conditions</p>
         </div>
       </div>
 
       <div className="city-notes-list">
+        <NoteEditor
+          value={text}
+          onClick={() => {
+            saveNote(undefined, text, Name);
+            setText('');
+          }}
+          onChange={(e) => setText(e.target.value)}
+        />
+
         {cityNotes?.length === 0 ? (
           <p>You have not saved any notes for {Name}</p>
         ) : (

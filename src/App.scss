@@ -4,29 +4,48 @@
   text-align: center;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 input,
 textarea {
+  height: 3em;
+  // width: 15em;
+  width: 100%;
+  resize: none;
   padding: 7px;
   font-size: 18px;
   border-radius: 6px;
+  font-family: inherit;
   border: 1px solid gray;
 
   &:focus {
     outline: none;
-    border-color: orange;
+    border-color: #07f;
     box-shadow: -3px 3px 6px 0px #a79f9f;
   }
+}
+
+textarea.disabled {
+  background-color: #ddd;
 }
 
 button {
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  cursor: pointer;
   padding: 10px;
   border-radius: 6px;
   outline: none;
   border: none;
   background-color: #07f;
   box-shadow: -3px 3px 6px 0px #a79f9f;
+}
+
+.close-container {
+  top: 0;
+  right: 0;
+  padding: 3px;
+  position: absolute;
 }

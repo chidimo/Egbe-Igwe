@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DELIST_CITY, GET_CITIES } from '../aTypes';
+import { DELIST_CITY, GET_CITIES, GET_CITY } from '../aTypes';
 import { WA_CITIES } from '../../../utils/storeKeys';
 
 export const CitiesStateCtx = React.createContext({});
@@ -9,6 +9,7 @@ export const CitiesDispatchCtx = React.createContext({});
 
 export const initState = {
   cities: [],
+  currentCity: { Population: 1 },
 };
 
 export const reducer = (state = {}, action) => {
@@ -23,8 +24,16 @@ export const reducer = (state = {}, action) => {
         ...state,
         cities: state.cities.filter((ct) => ct.rank !== action.rank),
       };
+    case GET_CITY: {
+      return {
+        ...state,
+        currentCity: {
+          ...state.cities.filter((ct) => ct.Name === action.Name)[0],
+        },
+      };
+    }
     default:
-      break;
+      return state;
   }
 };
 

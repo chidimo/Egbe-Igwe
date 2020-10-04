@@ -7,13 +7,12 @@ export const useSaveNote = () => {
   const notesDispatch = useNotesDispatch();
 
   const saveNote = (id, text, Name) => {
-    console.log(id, text);
     switch (true) {
       case text.length < 3:
         alert('Note is too short');
         return;
-      case text.length > 50:
-        alert('Note is too long');
+      case text.length > 100:
+        alert('Note is too long. Maximum allowed is 100 characters');
         return;
       case id === undefined:
         notesDispatch({ type: NEW_NOTE, text, username, Name });

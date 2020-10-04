@@ -1,10 +1,19 @@
 import React from 'react';
 import { useSaveNote } from '../city/useSaveNote';
+import { NoteEditor } from './NoteEditor';
+import { IconSet } from '../IconSet';
+
+import './note.scss';
+import { useNotesDispatch } from './context/useNotes';
+import { DELETE_NOTE } from './aTypes';
+import { useUserState } from '../auth/context/useUsers';
 
 export const Note = (props) => {
   const { note } = props;
 
   const { saveNote } = useSaveNote();
+  const { username } = useUserState();
+  const notesDisaptch = useNotesDispatch();
 
   const [text, setText] = React.useState('');
   const [editing, setEditing] = React.useState(false);
@@ -16,29 +25,46 @@ export const Note = (props) => {
   return (
     <div>
       {editing ? (
-        <div className="note-editor">
-          <textarea
+        <>
+          <NoteEditor
+            id={note.id}
             value={text}
-            placeholder="Enter notes"
             onBlur={() => {
               saveNote(note.id, text);
               setEditing(false);
             }}
             onChange={(e) => setText(e.target.value)}
           />
-
-          <div>
-            <button
+        </>
+      ) : (
+        <div className="note-container">
+          <div className="close-container pointer">
+            <span
               onClick={() => {
-                saveNote(note.id, text);
+                if (window.confirm('Are you sure')) {
+                  notesDisaptch({ type: DELETE_NOTE, id: note.id, username });
+                }
               }}
             >
-              Save
-            </button>
+              <IconSet name="cancel" color="red" size="1.7rem" />
+            </span>
+          </div>
+
+          <div className="textarea-container">
+            <textarea
+              value={note.text}
+              placeholder="Enter notes"
+              className="disabled"
+              onChange={() => {}}
+              onClick={() => {
+                setEditing(true);
+                setTimeout(() => {
+                  document.getElementById(note.id).focus();
+                }, 300);
+              }}
+            />
           </div>
         </div>
-      ) : (
-        <p onClick={() => setEditing(true)}>{note.text}</p>
       )}
     </div>
   );

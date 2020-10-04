@@ -34,7 +34,9 @@ const Login = () => {
             }}
           />
         </div>
-        <button onClick={() => submit()}>Submit</button>
+        <button className="pointer" onClick={() => submit()}>
+          Submit
+        </button>
       </div>
     </div>
   );

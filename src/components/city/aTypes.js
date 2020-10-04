@@ -1,3 +1,4 @@
+export const GET_CITY = 'GET_CITY';
 export const GET_CITIES = 'GET_CITIES';
 export const DELIST_CITY = 'DELIST_CITY';
 export const LOAD_CACHED_WEATHER = 'LOAD_CACHED_WEATHER';

@@ -1,18 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SET_USER } from '../aTypes';
+import { LIKE_CITY, SET_USER, UNLIKE_CITY } from '../aTypes';
+import { WA_USERNAME } from '../../../utils/storeKeys';
 
 export const UserStateCtx = React.createContext({});
 export const UserDispatchCtx = React.createContext({});
 
 export const initState = {
   username: 'chidimo',
+  likedCities: [],
 };
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, username: action.username };
+      const u = { ...state, username: action.username };
+      localStorage.setItem(WA_USERNAME, JSON.stringify(u));
+      return u;
+    case LIKE_CITY:
+      const u2 = {
+        ...state,
+        likedCities: state.likedCities.concat(action.Name),
+      };
+      localStorage.setItem(WA_USERNAME, JSON.stringify(u2));
+      return u2;
+    case UNLIKE_CITY:
+      const u3 = {
+        ...state,
+        likedCities: state.likedCities.filter((lc) => lc !== action.Name),
+      };
+      localStorage.setItem(WA_USERNAME, JSON.stringify(u3));
+      return u3;
     default:
       break;
   }
@@ -20,6 +38,7 @@ export const reducer = (state = {}, action) => {
 
 export const UserProvider = ({ children }) => {
   const [user, userDispatch] = React.useReducer(reducer, initState);
+  console.log(user);
   return (
     <UserStateCtx.Provider value={user}>
       <UserDispatchCtx.Provider value={userDispatch}>

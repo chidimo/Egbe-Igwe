@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   LOAD_NOTES,
@@ -30,14 +31,18 @@ export const reducer = (state = {}, action) => {
       return state;
     case NEW_NOTE: {
       const userNotes = state[action.username] || [];
-      userNotes.push({
-        id: userNotes.length + 1,
-        text: action.text,
-        city: action.Name,
-      });
-      const updated = { ...state, [action.username]: userNotes };
-      localStorage.setItem(WA_NOTES, JSON.stringify(updated));
-      return updated;
+      const uNotes = [
+        {
+          id: uuidv4(),
+          text: action.text,
+          city: action.Name,
+          timeStamp: new Date().toISOString(),
+        },
+      ].concat(userNotes);
+
+      const u1 = { ...state, [action.username]: uNotes };
+      localStorage.setItem(WA_NOTES, JSON.stringify(u1));
+      return u1;
     }
     case EDIT_NOTE: {
       const userNotes = state[action.username];
@@ -45,15 +50,17 @@ export const reducer = (state = {}, action) => {
       if (note) {
         note['text'] = action.text;
       }
-      const updated = { ...state, [action.username]: userNotes };
-      localStorage.setItem(WA_NOTES, JSON.stringify(updated));
-      return updated;
+      const u2 = { ...state, [action.username]: userNotes };
+      localStorage.setItem(WA_NOTES, JSON.stringify(u2));
+      return u2;
     }
     case DELETE_NOTE: {
-      const userNotes = state[action.username];
-      const updated = userNotes.filter((nt) => nt.id !== action.id);
-      localStorage.setItem(WA_NOTES, JSON.stringify(updated));
-      return updated;
+      const userNotes = state[action.username].filter(
+        (nt) => nt.id !== action.id,
+      );
+      const u3 = { ...state, [action.username]: userNotes };
+      localStorage.setItem(WA_NOTES, JSON.stringify(u3));
+      return u3;
     }
     default:
       return state;
