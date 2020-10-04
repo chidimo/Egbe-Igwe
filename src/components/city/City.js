@@ -43,8 +43,6 @@ const City = () => {
   const cityWInfo = cityData[Name] || { location: {} };
   const { location } = cityWInfo;
 
-  console.log(likedCities);
-
   React.useEffect(() => {
     citiesDispatch({ type: GET_CITY, Name });
   }, [Name, citiesDispatch]);

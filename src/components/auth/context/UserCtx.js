@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LIKE_CITY, SET_USER, UNLIKE_CITY } from '../aTypes';
+import { LIKE_CITY, LOGOUT, SET_USER, UNLIKE_CITY } from '../aTypes';
 import { WA_USERNAME } from '../../../utils/storeKeys';
 
 export const UserStateCtx = React.createContext({});
@@ -31,6 +31,9 @@ export const reducer = (state = {}, action) => {
       };
       localStorage.setItem(WA_USERNAME, JSON.stringify(u3));
       return u3;
+    case LOGOUT:
+      // localStorage.removeItem(WA_USERNAME);
+      return { ...state, username: '' };
     default:
       break;
   }
