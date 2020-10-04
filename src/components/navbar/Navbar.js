@@ -14,7 +14,7 @@ export const Navbar = () => {
       <nav role="navigation">
         <div className="left-side">
           <Link to="/" className="branding">
-            Weather app
+            Egbe Igwe
           </Link>
         </div>
 
@@ -24,14 +24,15 @@ export const Navbar = () => {
           </div>
 
           <div>
-            <p
+            <button
+              className="logout pointer"
               onClick={() => {
                 userDispatch({ type: LOGOUT });
                 history.push({ pathname: '/' });
               }}
             >
               Logout
-            </p>
+            </button>
           </div>
         </div>
       </nav>

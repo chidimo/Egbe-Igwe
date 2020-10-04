@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LIKE_CITY, LOGOUT, SET_USER, UNLIKE_CITY } from '../aTypes';
+import { LIKE_CITY, LOAD_USER, LOGOUT, SET_USER, UNLIKE_CITY } from '../aTypes';
 import { WA_USERNAME } from '../../../utils/storeKeys';
 
 export const UserStateCtx = React.createContext({});
@@ -13,6 +13,9 @@ export const initState = {
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {
+    case LOAD_USER:
+      const ls = JSON.parse(localStorage.getItem(WA_USERNAME));
+      return ls;
     case SET_USER:
       const u = { ...state, username: action.username };
       localStorage.setItem(WA_USERNAME, JSON.stringify(u));
@@ -41,7 +44,6 @@ export const reducer = (state = {}, action) => {
 
 export const UserProvider = ({ children }) => {
   const [user, userDispatch] = React.useReducer(reducer, initState);
-  console.log(user);
   return (
     <UserStateCtx.Provider value={user}>
       <UserDispatchCtx.Provider value={userDispatch}>

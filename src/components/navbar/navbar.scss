@@ -4,21 +4,30 @@ header {
   position: fixed;
   width: 100%;
   margin-bottom: 15px;
+  box-shadow: -3px 3px 6px 0px #a79f9f;
+  background-color: #032029;
 
   p {
     margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #39ff14;
   }
 }
 
 nav {
   padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: lightblue;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  // align-items: center;
+  // justify-content: space-between;
 }
 
 .left-side {
+  text-align: left;
+
   .branding {
     font-size: 28px;
     font-weight: bold;
@@ -28,4 +37,10 @@ nav {
 .right-side {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+
+  div {
+    font-size: 20px;
+    padding: 0 10px;
+  }
 }

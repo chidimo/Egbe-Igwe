@@ -57,8 +57,8 @@ const City = () => {
 
   return (
     <div className="city-page">
-      <h2>
-        About {Name}, {location.country}{' '}
+      <h2 className="city-country-name">
+        {Name}, {location.country}{' '}
         {likedCities.includes(Name) ? (
           <span
             className="pointer"
