@@ -8,7 +8,7 @@ import { useCitiesDispatch } from './context/useCities';
 import { useWeatherState } from './context/useWeather';
 
 export const CityCard = (props) => {
-  const { city, tabIndex } = props;
+  const { city, isLiked, tabIndex } = props;
   const { rank, Name } = city;
   const wInfo = useWeatherState();
   const citiesDispatch = useCitiesDispatch();
@@ -33,6 +33,8 @@ export const CityCard = (props) => {
           <Link to={`/city/${Name}`} tabIndex={tabIndex} className="city-name">
             {Name}
           </Link>
+
+          {isLiked && <IconSet name="like" size={'1.7rem'} />}
 
           <div className="close-container pointer">
             <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useUserState } from '../auth/context/useUsers';
 import { getCurrentCityWeather } from '../city/actions';
 import { CityCard } from '../city/CityCard';
 
@@ -10,6 +11,7 @@ import './home.scss';
 const Home = () => {
   const { cities } = useCitiesState();
   const wDispatch = useWeatherDispatch();
+  const { likedCities } = useUserState();
 
   React.useEffect(() => {
     cities.slice(0, 0).forEach((city) => {
@@ -26,12 +28,23 @@ const Home = () => {
         ) : (
           <>
             {cities
+
               .sort((a, b) =>
                 a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
               )
+              .sort(
+                (a, b) =>
+                  likedCities.includes(b.Name) - likedCities.includes(a.Name),
+              )
               .map((city, i) => {
+                const { rank, Name } = city;
                 return (
-                  <CityCard key={city.rank} city={city} tabIndex={5 + i} />
+                  <CityCard
+                    key={rank}
+                    city={city}
+                    tabIndex={5 + i}
+                    isLiked={likedCities.includes(Name)}
+                  />
                 );
               })}
           </>
