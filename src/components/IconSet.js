@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { IconContext } from 'react-icons';
-import { MdCancel } from 'react-icons/md';
+import { MdCancel, MdMyLocation } from 'react-icons/md';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 
 export const IconSet = (props) => {
@@ -10,6 +10,9 @@ export const IconSet = (props) => {
   let Icon = null;
 
   switch (name) {
+    case 'my-location':
+      Icon = MdMyLocation;
+      break;
     case 'unlike':
       Icon = FcLikePlaceholder;
       break;

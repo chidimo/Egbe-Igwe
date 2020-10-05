@@ -11,7 +11,8 @@ export const getCurrentCityWeather = (Name) => async (dispatch) => {
     if (data.current) {
       dispatch({ type: GET_W_DATA, Name, data });
     }
-    return { success: true };
+    const cityName = data.location.name;
+    return { success: true, cityName };
   } catch (e) {
     const { response } = e;
     return response?.data;

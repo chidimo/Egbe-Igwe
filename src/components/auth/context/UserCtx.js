@@ -57,7 +57,7 @@ export const reducer = (state = {}, action) => {
 
 export const UserProvider = ({ children }) => {
   const [user, userDispatch] = React.useReducer(reducer, initState);
-  console.log(user);
+
   return (
     <UserStateCtx.Provider value={user}>
       <UserDispatchCtx.Provider value={userDispatch}>

@@ -14,7 +14,11 @@ export const reducer = (state = {}, action) => {
       return { ...state, ...cached };
     }
     case GET_W_DATA: {
-      const updatedState = { ...state, [action.Name]: action.data };
+      let locName = action.Name;
+      if (action.data.request.type === 'LatLon') {
+        locName = action.data.location.name;
+      }
+      const updatedState = { ...state, [locName]: action.data };
       localStorage.setItem(WA_WEATHER_DATA, JSON.stringify(updatedState));
       return updatedState;
     }
