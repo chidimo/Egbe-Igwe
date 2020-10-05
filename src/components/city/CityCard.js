@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { IconSet } from '../IconSet';
+import { Link } from 'react-router-dom';
 
 import { DELIST_CITY } from './aTypes';
 import './city-card.scss';
@@ -8,8 +8,7 @@ import { useCitiesDispatch } from './context/useCities';
 import { useWeatherState } from './context/useWeather';
 
 export const CityCard = (props) => {
-  const history = useHistory();
-  const { city } = props;
+  const { city, tabIndex } = props;
   const { rank, Name } = city;
   const wInfo = useWeatherState();
   const citiesDispatch = useCitiesDispatch();
@@ -31,14 +30,9 @@ export const CityCard = (props) => {
     <div className="city-card">
       <div className="city-cart--1-3">
         <div className="name-section">
-          <p
-            className="city-name pointer"
-            onClick={() => {
-              history.push({ pathname: `/city/${Name}` });
-            }}
-          >
+          <Link to={`/city/${Name}`} tabIndex={tabIndex} className="city-name">
             {Name}
-          </p>
+          </Link>
 
           <div className="close-container pointer">
             <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>

@@ -29,8 +29,10 @@ const Home = () => {
               .sort((a, b) =>
                 a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
               )
-              .map((city) => {
-                return <CityCard key={city.rank} city={city} />;
+              .map((city, i) => {
+                return (
+                  <CityCard key={city.rank} city={city} tabIndex={5 + i} />
+                );
               })}
           </>
         )}
