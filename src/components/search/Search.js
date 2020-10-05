@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { LocatingLoader } from '../AppLoaders';
 import { getCurrentCityWeather } from '../city/actions';
 import { useWeatherDispatch } from '../city/context/useWeather';
 import { IconSet } from '../IconSet';
@@ -62,7 +63,7 @@ export const Search = () => {
           }}
         >
           {isLocating ? (
-            <span>Locating</span>
+            <LocatingLoader />
           ) : (
             <IconSet name="my-location" color="red" size="1.7rem" />
           )}
