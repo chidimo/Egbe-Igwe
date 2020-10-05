@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LIKE_CITY, LOAD_USER, LOGOUT, LOGIN, UNLIKE_CITY } from '../aTypes';
-import { WA_LIKED_CITIES, WA_USERNAME } from '../../../utils/storeKeys';
+import {
+  WA_CITIES,
+  WA_LIKED_CITIES,
+  WA_USERNAME,
+} from '../../../utils/storeKeys';
 
 export const UserStateCtx = React.createContext({});
 export const UserDispatchCtx = React.createContext({});
@@ -35,10 +39,22 @@ export const reducer = (state = {}, action) => {
       existingLikes.push(action.Name);
       lCities[state.username] = existingLikes;
 
+      const { cities, currentCity } = JSON.parse(
+        localStorage.getItem(WA_CITIES),
+      );
+
+      const city_exists = cities.filter((ct) => ct.Name === action.Name)[0];
+      if (!city_exists) {
+        cities.push({ Name: action.Name, Country: action.country });
+      }
+
+      localStorage.setItem(WA_CITIES, JSON.stringify({ cities, currentCity }));
+
       const u2 = { ...state, likedCities: existingLikes };
       localStorage.setItem(WA_LIKED_CITIES, JSON.stringify(lCities));
       return u2;
     }
+
     case UNLIKE_CITY: {
       const existingLikes = lCities[state.username];
       const updated = existingLikes.filter((lc) => lc !== action.Name);

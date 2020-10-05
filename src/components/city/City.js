@@ -9,8 +9,8 @@ import { LOAD_NOTES } from '../notes/aTypes';
 import { Note } from '../notes/Note';
 import { useSaveNote } from './useSaveNote';
 import { NoteEditor } from '../notes/NoteEditor';
-import { useCitiesDispatch, useCitiesState } from './context/useCities';
-import { formatAsNumber } from '../../utils/formatters';
+import { useCitiesDispatch } from './context/useCities';
+
 import './city.scss';
 import { GET_CITY } from './aTypes';
 import { IconSet } from '../IconSet';
@@ -21,7 +21,6 @@ const City = () => {
   const { username, likedCities } = useUserState();
   const userDispatch = useUserDispatch();
 
-  const { currentCity } = useCitiesState();
   const citiesDispatch = useCitiesDispatch();
 
   const wInfo = useWeatherState();
@@ -40,8 +39,18 @@ const City = () => {
   const [text, setText] = React.useState('');
 
   const cityData = wInfo || JSON.parse(localStorage.getItem(WA_WEATHER_DATA));
-  const cityWInfo = cityData[Name] || { location: {} };
-  const { location } = cityWInfo;
+
+  const cityWInfo = cityData[Name] || {
+    location: {},
+    current: {},
+    weather_descriptions: [],
+  };
+  const { location, current } = cityWInfo;
+
+  const { country } = location;
+
+  const { temperature: celcius, weather_descriptions, weather_icons } = current;
+  const fahrenheit = (celcius * 1.8 + 32).toFixed(2);
 
   React.useEffect(() => {
     citiesDispatch({ type: GET_CITY, Name });
@@ -58,7 +67,7 @@ const City = () => {
   return (
     <div className="direct-main-child city-page">
       <h2 className="city-country-name">
-        {Name}, {location.country}{' '}
+        {Name}, {country}{' '}
         {likedCities.includes(Name) ? (
           <span
             className="pointer"
@@ -72,7 +81,7 @@ const City = () => {
           <span
             className="pointer"
             onClick={() => {
-              userDispatch({ type: LIKE_CITY, Name });
+              userDispatch({ type: LIKE_CITY, Name, country });
             }}
           >
             <IconSet name="unlike" size={'1.7rem'} />
@@ -81,13 +90,22 @@ const City = () => {
       </h2>
 
       <div className="city-info">
-        <p>Population: {formatAsNumber(currentCity.Population)}</p>
+        <img src={weather_icons[0]} alt="Weather icon" />
+        <div>
+          {weather_descriptions.map((wd) => {
+            return <p>{wd}</p>;
+          })}
+        </div>
         <p>
           Latitude {location.lat}, Longitude {location.lon}
         </p>
         <p>Local time: {location.localtime}</p>
         <div>
-          <p>Current weather conditions</p>
+          <h4>Current weather conditions</h4>
+          <p>
+            {celcius} <span className="symbol">&#8451;</span> ({fahrenheit}{' '}
+            &#x2109;)
+          </p>
         </div>
       </div>
 

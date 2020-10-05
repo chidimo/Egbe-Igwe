@@ -12,6 +12,7 @@ import Login from './components/auth/Login';
 import { GET_CITIES, LOAD_CACHED_WEATHER } from './components/city/aTypes';
 import { useWeatherDispatch } from './components/city/context/useWeather';
 import { LOAD_USER } from './components/auth/aTypes';
+import { WA_CITIES } from './utils/storeKeys';
 
 setupAxios();
 
@@ -30,7 +31,11 @@ export default function App() {
   }, [wDispatch]);
 
   React.useEffect(() => {
-    citiesDispatch({ type: GET_CITIES, cities: worldCities.slice(0, 15) });
+    let cities = worldCities.slice(0, 15);
+    const existing = JSON.parse(localStorage.getItem(WA_CITIES));
+
+    if (existing.cities) cities = existing.cities;
+    citiesDispatch({ type: GET_CITIES, cities });
   }, [citiesDispatch]);
 
   return (

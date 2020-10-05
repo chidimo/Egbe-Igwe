@@ -14,7 +14,7 @@ export const CityCard = (props) => {
   const citiesDispatch = useCitiesDispatch();
 
   const {
-    current: { temperature: celsius, weather_icons, observation_time },
+    current: { temperature: celcius, weather_icons, observation_time },
   } = wInfo[Name] || {
     current: {
       temperature: 20,
@@ -24,7 +24,7 @@ export const CityCard = (props) => {
       ],
     },
   };
-  const fahrenheit = (celsius * 1.8 + 32).toFixed(2);
+  const fahrenheit = (celcius * 1.8 + 32).toFixed(2);
 
   return (
     <div className="city-card">
@@ -54,7 +54,7 @@ export const CityCard = (props) => {
 
       <div className="city-card--3-3">
         <p className="main-temp">
-          {celsius} <span className="symbol">&#8451;</span>
+          {celcius} <span className="symbol">&#8451;</span>
         </p>
         <p className="minor-temp">{fahrenheit} &#x2109;</p>
       </div>

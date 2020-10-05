@@ -27,7 +27,7 @@ export const Note = (props) => {
     setEditing(true);
     setTimeout(() => {
       document.getElementById(note.id).focus();
-    }, 300);
+    }, 250);
   };
 
   return (
