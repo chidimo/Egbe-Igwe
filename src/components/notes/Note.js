@@ -23,6 +23,13 @@ export const Note = (props) => {
     setText(note.text);
   }, [note]);
 
+  const activateEditor = () => {
+    setEditing(true);
+    setTimeout(() => {
+      document.getElementById(note.id).focus();
+    }, 300);
+  }
+
   return (
     <div>
       {editing ? (
@@ -57,12 +64,8 @@ export const Note = (props) => {
               placeholder="Enter notes"
               className="disabled"
               onChange={() => {}}
-              onClick={() => {
-                setEditing(true);
-                setTimeout(() => {
-                  document.getElementById(note.id).focus();
-                }, 300);
-              }}
+              onFocus={activateEditor}
+              onClick={activateEditor}
             />
           </div>
 
