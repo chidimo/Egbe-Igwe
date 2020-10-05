@@ -19,35 +19,47 @@ export const MyLocation = () => {
     });
   };
 
-  return (
-    <div className="location-container pointer" tabIndex="4">
-      <span
-        onClick={async () => {
-          const gl = window.navigator.geolocation;
-          if (!gl) {
-            alert('Geolocation is not supported by this browser.');
-          } else {
-            setLocating(true);
-            promiseGeo()
-              .then((position) => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
+  const showMyCity = async () => {
+    const gl = window.navigator.geolocation;
+    if (!gl) {
+      alert('Geolocation is not supported by this browser.');
+    } else {
+      setLocating(true);
+      promiseGeo()
+        .then((position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
 
-                getCurrentCityWeather(`${lat}, ${lon}`)(wDispatch)
-                  .then((res) => {
-                    if (res.success) {
-                      history.push({ pathname: `/city/${res.cityName}` });
-                    }
-                  })
-                  .catch((err) => err);
-              })
-              .catch(() => {
-                alert('Unable to retrieve your location at this time.');
-                setLocating(false);
-              });
-          }
-        }}
-      >
+          getCurrentCityWeather(`${lat}, ${lon}`)(wDispatch)
+            .then((res) => {
+              if (res.success) {
+                history.push({ pathname: `/city/${res.cityName}` });
+              }
+            })
+            .catch((err) => {
+              setLocating(false);
+              alert('Unable to retrieve your location at this time.');
+              return err;
+            });
+        })
+        .catch(() => {
+          alert('Unable to retrieve your location at this time.');
+          setLocating(false);
+        });
+    }
+  };
+
+  return (
+    <div
+      className="location-container pointer"
+      tabIndex="4"
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          showMyCity();
+        }
+      }}
+    >
+      <span onClick={showMyCity}>
         {isLocating ? (
           <LocatingLoader />
         ) : (
