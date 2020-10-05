@@ -11,11 +11,11 @@ export const FallBack = () => {
         justifyContent: 'center',
       }}
     >
-      <Loader type="Puff" />
+      <Loader type="Oval" />
     </div>
   );
 };
 
 export const LocatingLoader = () => {
-  return <Loader type='Puff' height={25} width={25} />
-}
+  return <Loader type="Puff" height={25} width={25} />;
+};

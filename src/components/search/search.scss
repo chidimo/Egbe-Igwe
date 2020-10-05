@@ -12,8 +12,12 @@
 }
 
 .location-container {
-  top: 9px;
+  top: 11px;
   right: 0;
   padding: 3px;
   position: absolute;
+}
+
+.locating-loader:focus {
+  outline: none;
 }

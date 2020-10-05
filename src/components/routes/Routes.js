@@ -9,13 +9,11 @@ const Home = React.lazy(() => import('../home/Home'));
 const City = React.lazy(() => import('../city/City'));
 const NoteIndex = React.lazy(() => import('../notes/NoteIndex'));
 
-
-
 export const Routes = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ErrorBoundary>
-        <React.Suspense fallback={<FallBack/>}>
+        <React.Suspense fallback={<FallBack />}>
           <Navbar />
 
           <div className="main-app">
