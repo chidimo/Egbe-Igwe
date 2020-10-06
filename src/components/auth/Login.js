@@ -6,7 +6,7 @@ import { LOGIN } from './aTypes';
 
 const Login = () => {
   const userDispatch = useUserDispatch();
-  const [username, setUsername] = React.useState('');
+  const [ username, setUsername ] = React.useState('');
 
   const submit = () => {
     if (!username) {

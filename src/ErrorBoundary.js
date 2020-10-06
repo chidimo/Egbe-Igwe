@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WA_RETRY } from './utils/storeKeys';
+import {WA_RETRY} from './utils/storeKeys';
 
 class ErrorBoundary extends React.Component {
   state = {
@@ -21,14 +21,14 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true, error };
+    return {hasError: true, error};
   }
 
   componentDidCatch(error, info) {
     // eslint-disable-next-line no-console
-    console.log({ error, info });
+    console.log({error, info});
 
-    const { reloadThreshold, reloadCount } = this.state;
+    const {reloadThreshold, reloadCount} = this.state;
     if (reloadThreshold < reloadCount) {
       localStorage.setItem(WA_RETRY, reloadThreshold + 1);
       window.location.reload();
@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    const { hasError } = this.state;
+    const {hasError} = this.state;
     if (hasError) {
       return (
         <div className="error__boundary--parent" data-testid="error-boundary">
@@ -44,7 +44,7 @@ class ErrorBoundary extends React.Component {
             <p>
               There was an error in loading this page.{' '}
               <span
-                style={{ cursor: 'pointer', color: '#0077FF' }}
+                style={{cursor: 'pointer', color: '#0077FF'}}
                 onClick={() => {
                   window.location.reload();
                 }}
@@ -64,4 +64,4 @@ ErrorBoundary.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
 
-export { ErrorBoundary };
+export {ErrorBoundary};

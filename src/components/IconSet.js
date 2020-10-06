@@ -10,20 +10,20 @@ export const IconSet = (props) => {
   let Icon = null;
 
   switch (name) {
-    case 'my-location':
-      Icon = MdMyLocation;
-      break;
-    case 'unlike':
-      Icon = FcLikePlaceholder;
-      break;
-    case 'like':
-      Icon = FcLike;
-      break;
-    case 'cancel':
-      Icon = MdCancel;
-      break;
-    default:
-      break;
+  case 'my-location':
+    Icon = MdMyLocation;
+    break;
+  case 'unlike':
+    Icon = FcLikePlaceholder;
+    break;
+  case 'like':
+    Icon = FcLike;
+    break;
+  case 'cancel':
+    Icon = MdCancel;
+    break;
+  default:
+    break;
   }
 
   return (

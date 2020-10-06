@@ -1,19 +1,19 @@
 import React from 'react';
-import { useNotesDispatch, useNotesState } from './context/useNotes';
-import { useUserState } from '../auth/context/useUsers';
-import { LOAD_NOTES } from './aTypes';
-import { Note } from './Note';
+import {useNotesDispatch, useNotesState} from './context/useNotes';
+import {useUserState} from '../auth/context/useUsers';
+import {LOAD_NOTES} from './aTypes';
+import {Note} from './Note';
 import '../city/city.scss';
 
 const NoteIndex = () => {
-  const { username } = useUserState();
+  const {username} = useUserState();
 
   const notes = useNotesState();
   const notesDispatch = useNotesDispatch();
   const myNotes = notes[username];
 
   React.useEffect(() => {
-    notesDispatch({ type: LOAD_NOTES, username });
+    notesDispatch({type: LOAD_NOTES, username});
   }, [notesDispatch, username]);
 
   return (
@@ -27,7 +27,7 @@ const NoteIndex = () => {
           <>
             {myNotes
               ?.sort((a, b) =>
-                a.city.localeCompare(b.city, { sensitivity: 'base' }),
+                a.city.localeCompare(b.city, {sensitivity: 'base'}),
               )
               .map((n) => {
                 return <Note key={n.id} note={n} indexPage={true} />;

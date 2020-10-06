@@ -17,7 +17,7 @@ const Home = () => {
     cities.slice(0, 0).forEach((city) => {
       getCurrentCityWeather(city.Name)(wDispatch);
     });
-  }, [cities, wDispatch]);
+  }, [ cities, wDispatch ]);
 
   return (
     <div className="direct-main-child home-container">
@@ -37,10 +37,10 @@ const Home = () => {
                   likedCities.includes(b.Name) - likedCities.includes(a.Name),
               )
               .map((city, i) => {
-                const { rank, Name } = city;
+                const { Name } = city;
                 return (
                   <CityCard
-                    key={rank}
+                    key={i}
                     city={city}
                     tabIndex={5 + i}
                     isLiked={likedCities.includes(Name)}

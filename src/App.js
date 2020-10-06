@@ -24,11 +24,11 @@ export default function App() {
 
   React.useEffect(() => {
     userDispatch({ type: LOAD_USER });
-  }, [userDispatch]);
+  }, [ userDispatch ]);
 
   React.useEffect(() => {
     wDispatch({ type: LOAD_CACHED_WEATHER });
-  }, [wDispatch]);
+  }, [ wDispatch ]);
 
   React.useEffect(() => {
     let cities = worldCities.slice(0, 15);
@@ -36,7 +36,7 @@ export default function App() {
 
     if (existing.cities) cities = existing.cities;
     citiesDispatch({ type: GET_CITIES, cities });
-  }, [citiesDispatch]);
+  }, [ citiesDispatch ]);
 
   return (
     <div className="App">

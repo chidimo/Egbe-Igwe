@@ -588,7 +588,7 @@ export const worldCities = [
   {
     rank: 74,
     Name: 'Abidjan',
-    Country: "Côte d'Ivoire",
+    Country: 'Côte d\'Ivoire',
     Population: 5202762,
     Prev: 5058550,
     Growth: '0.0285',
@@ -1164,7 +1164,7 @@ export const worldCities = [
   {
     rank: 146,
     Name: 'Pyongyang',
-    Country: "Dem. People's Republic of Korea",
+    Country: 'Dem. People\'s Republic of Korea',
     Population: 3084244,
     Prev: 3060864,
     Growth: '0.0076',
@@ -4243,7 +4243,7 @@ export const worldCities = [
   },
   {
     rank: 531,
-    Name: "Ma'anshan",
+    Name: 'Ma\'anshan',
     Country: 'China',
     Population: 1019389,
     Prev: 986525,
@@ -5915,7 +5915,7 @@ export const worldCities = [
   },
   {
     rank: 740,
-    Name: "Bur Sa'id",
+    Name: 'Bur Sa\'id',
     Country: 'Egypt',
     Population: 737000,
     Prev: 723998,
@@ -6484,7 +6484,7 @@ export const worldCities = [
   {
     rank: 811,
     Name: 'Vientiane',
-    Country: "Lao People's Democratic Republic",
+    Country: 'Lao People\'s Democratic Republic',
     Population: 682542,
     Prev: 673061,
     Growth: '0.0141',
@@ -6563,7 +6563,7 @@ export const worldCities = [
   },
   {
     rank: 821,
-    Name: "Yan'an",
+    Name: 'Yan\'an',
     Country: 'China',
     Population: 678619,
     Prev: 646393,
@@ -6940,7 +6940,7 @@ export const worldCities = [
   {
     rank: 868,
     Name: 'Chongjin',
-    Country: "Dem. People's Republic of Korea",
+    Country: 'Dem. People\'s Republic of Korea',
     Population: 642447,
     Prev: 639743,
     Growth: '0.0042',
@@ -7043,7 +7043,7 @@ export const worldCities = [
   },
   {
     rank: 881,
-    Name: "Be'er Sheva",
+    Name: 'Be\'er Sheva',
     Country: 'Israel',
     Population: 637539,
     Prev: 631052,
@@ -7900,7 +7900,7 @@ export const worldCities = [
   {
     rank: 988,
     Name: 'Bouake',
-    Country: "Côte d'Ivoire",
+    Country: 'Côte d\'Ivoire',
     Population: 571876,
     Prev: 564745,
     Growth: '0.0126',
@@ -8300,7 +8300,7 @@ export const worldCities = [
   {
     rank: 1038,
     Name: 'Hamhung',
-    Country: "Dem. People's Republic of Korea",
+    Country: 'Dem. People\'s Republic of Korea',
     Population: 548992,
     Prev: 553224,
     Growth: '-0.0076',

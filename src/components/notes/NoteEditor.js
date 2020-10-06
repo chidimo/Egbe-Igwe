@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './note.scss';
 
@@ -24,4 +25,12 @@ export const NoteEditor = (props) => {
       )}
     </div>
   );
+};
+
+NoteEditor.propTypes = {
+  id: PropTypes.string,
+  value: PropTypes.string,
+  onBlur: PropTypes.func,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
 };

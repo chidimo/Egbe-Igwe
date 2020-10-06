@@ -11,7 +11,7 @@ export const MyLocation = () => {
   const history = useHistory();
   const wDispatch = useWeatherDispatch();
 
-  const [isLocating, setLocating] = React.useState(false);
+  const [ isLocating, setLocating ] = React.useState(false);
 
   const promiseGeo = (options = {}) => {
     return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ export const MyLocation = () => {
     >
       <span onClick={showMyCity}>
         {isLocating ? (
-          <LocatingLoader />
+          <LocatingLoader height={25} width={25} />
         ) : (
           <IconSet name="my-location" color="red" size="1.7rem" />
         )}

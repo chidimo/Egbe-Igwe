@@ -13,8 +13,8 @@ export const Error404 = () => {
       <div>
         <p>
           The requested url{' '}
-          <span style={{ color: 'red' }}>{location.pathname}</span> was not
-          found on this server.
+          <span style={{ color: 'red' }}>{location.pathname}</span> was not found
+          on this server.
         </p>
 
         <Link to="/">Back to homepage</Link>

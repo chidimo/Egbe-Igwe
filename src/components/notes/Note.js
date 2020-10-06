@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { useSaveNote } from '../city/useSaveNote';
 import { NoteEditor } from './NoteEditor';
 import { IconSet } from '../IconSet';
@@ -16,12 +18,12 @@ export const Note = (props) => {
   const { username } = useUserState();
   const notesDisaptch = useNotesDispatch();
 
-  const [text, setText] = React.useState('');
-  const [editing, setEditing] = React.useState(false);
+  const [ text, setText ] = React.useState('');
+  const [ editing, setEditing ] = React.useState(false);
 
   React.useEffect(() => {
     setText(note.text);
-  }, [note]);
+  }, [ note ]);
 
   const activateEditor = () => {
     setEditing(true);
@@ -78,4 +80,9 @@ export const Note = (props) => {
       )}
     </div>
   );
+};
+
+Note.propTypes = {
+  note: PropTypes.object,
+  indexPage: PropTypes.bool,
 };
