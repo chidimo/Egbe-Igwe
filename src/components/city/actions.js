@@ -29,7 +29,7 @@ const CancelToken = axios.CancelToken;
 
 export const searchPlaces = async (query) => {
   axios.defaults.baseURL = gPlacesAPI;
-  cancel && cancel();
+  cancel && cancel('cancelled request');
 
   const canceller = {
     cancelToken: new CancelToken(function executor(c) {

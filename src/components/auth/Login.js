@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import './auth.scss';
 import { useUserDispatch } from './context/useUsers';
@@ -10,7 +11,7 @@ const Login = () => {
 
   const submit = () => {
     if (!username) {
-      alert('Please enter a username');
+      toast.error('Please enter a username');
     } else {
       userDispatch({ type: LOGIN, username });
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+
 import { LocatingLoader } from '../AppLoaders';
 import { IconSet } from '../IconSet';
 import { useRouteToCity } from '../hooks/useRouteToCity';
@@ -19,7 +21,7 @@ export const MyLocation = () => {
   const showMyCity = async () => {
     const gl = window.navigator.geolocation;
     if (!gl) {
-      alert('Geolocation is not supported by this browser.');
+      toast.info('Geolocation is not supported by this browser.');
     } else {
       setLocating(true);
       promiseGeo()
@@ -30,7 +32,7 @@ export const MyLocation = () => {
           routeToCity(coords, setLocating);
         })
         .catch(() => {
-          alert('Unable to retrieve your location at this time.');
+          toast.error('Unable to retrieve your location at this time.');
           setLocating(false);
         });
     }

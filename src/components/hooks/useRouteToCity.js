@@ -1,6 +1,10 @@
+import { toast } from 'react-toastify';
+
 import { useHistory } from 'react-router-dom';
 import { getCityWeather } from '../city/actions';
 import { useWeatherDispatch } from '../city/context/useWeather';
+
+const toastId = Symbol('tId');
 
 export const useRouteToCity = () => {
   const history = useHistory();
@@ -16,7 +20,9 @@ export const useRouteToCity = () => {
       })
       .catch((err) => {
         setFetching(false);
-        alert('Unable to retrieve your location at this time.');
+        toast.error('Unable to retrieve your location at this time.', {
+          toastId,
+        });
         return err;
       });
   };

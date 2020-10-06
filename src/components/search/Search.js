@@ -15,12 +15,34 @@ function debounce(fn, delay) {
 }
 
 export const Search = () => {
-  const [ query, setQuery ] = React.useState('');
-  const [ error, setError ] = React.useState('');
-  const [ searches, setSearches ] = React.useState([]);
-  const [ searching, setSearching ] = React.useState(false);
+  const reducer = (state = {}, action) => {
+    switch (action.type) {
+    case 'SET_QUERY':
+      return { ...state, query: action.query };
+    case 'SET_ERROR':
+      return { ...state, error: action.error };
+    case 'SET_RESULTS':
+      return { ...state, results: action.results };
+    case 'SET_OFFLINE':
+      return { ...state, isOffline: action.isOffline };
+    case 'SET_SEARCHING':
+      return { ...state, searching: action.searching };
+    default:
+      return state;
+    }
+  };
 
-  const isQuerying = query.length > 2;
+  const initState = {
+    query: '',
+    error: '',
+    results: [],
+    isOffline: false,
+    searching: false,
+  };
+
+  const [ info, dispatch ] = React.useReducer(reducer, initState);
+
+  const isQuerying = info.query.length > 2;
 
   const searchRsCont = React.useRef();
   const inputCont = React.useRef();
@@ -40,14 +62,20 @@ export const Search = () => {
 
   const doSearch = React.useCallback(
     debounce((term) => {
-      setSearching(true);
+      dispatch({ type: 'SET_SEARCHING', searching: true });
       searchPlaces(term)
         .then((res) => {
-          setSearching(false);
-          setSearches(res.candidates.slice(0, 4));
+          dispatch({ type: 'SET_OFFLINE', isOffline: false });
+          dispatch({ type: 'SET_SEARCHING', searching: false });
+          dispatch({ type: 'SET_RESULTS', results: res.candidates.slice(0, 4) });
         })
         .catch((err) => {
-          setSearching(false);
+          dispatch({ type: 'SET_SEARCHING', searching: false });
+          if (Object.values(err).includes('cancelled request')) {
+            //
+          } else {
+            dispatch({ type: 'SET_OFFLINE', isOffline: true });
+          }
           return err;
         });
     }, 250),
@@ -55,8 +83,8 @@ export const Search = () => {
   );
 
   React.useEffect(() => {
-    if (isQuerying) doSearch(query);
-  }, [ query, isQuerying, doSearch ]);
+    if (isQuerying) doSearch(info.query);
+  }, [ info.query, isQuerying, doSearch ]);
 
   return (
     <div className="search">
@@ -66,21 +94,24 @@ export const Search = () => {
             ref={(node) => (inputCont.current = node)}
             tabIndex="3"
             type="text"
-            value={query}
+            value={info.query}
             className={'search-city'}
             placeholder="Find a city..."
             onChange={(e) => {
               const text = e.target.value;
               if (text.length > 0 && text.length < 3) {
-                setError('Please enter at least 3 characters');
+                dispatch({
+                  type: 'SET_ERROR',
+                  error: 'Please enter at least 3 characters',
+                });
               } else {
-                setError('');
+                dispatch({ type: 'SET_ERROR', error: '' });
               }
-              setQuery(text);
+              dispatch({ type: 'SET_QUERY', query: text });
             }}
           />
         </div>
-        {error && <span className="error">{error}</span>}
+        {info.error && <span className="error">{info.error}</span>}
         <MyLocation />
       </div>
 
@@ -89,12 +120,17 @@ export const Search = () => {
         id="display-search-results"
         className="display-search-results"
       >
-        {searching ? (
+        {info.searching ? (
           <LocatingLoader width={40} height={40} />
         ) : (
           <>
-            {isQuerying && searches.length === 0 && <p>No matching location</p>}
-            {searches.map((sc, i) => {
+            {info.isOffline && (
+              <p>It seems you are offline. Please check your connection.</p>
+            )}
+            {isQuerying && !info.isOffline && info.results.length === 0 && (
+              <p>No matching location</p>
+            )}
+            {info.results.map((sc, i) => {
               return <SearchCard key={i} city={sc} />;
             })}
           </>

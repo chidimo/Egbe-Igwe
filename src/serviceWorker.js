@@ -10,6 +10,7 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
+import { toast } from 'react-toastify';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -70,9 +71,8 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.',
+              toast.info(
+                'App has been updated. Please close all tabs and re-open to get the latest update',
               );
 
               // Execute callback
@@ -83,7 +83,7 @@ function registerValidSW(swUrl, config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
+              toast.success('This app can now work offline.');
 
               // Execute callback
               if (config && config.onSuccess) {

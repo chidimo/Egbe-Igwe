@@ -1,4 +1,6 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+
 import { useHistory, useParams } from 'react-router-dom';
 import { WA_WEATHER_DATA } from '../../utils/storeKeys';
 import { getCityWeather } from './actions';
@@ -65,8 +67,9 @@ const City = () => {
     getCityWeather(loc)(wDispatch)
       .then((res) => {
         if (!res) {
-          history.push({ pathname: '/' });
-          alert('Unable to find this city.');
+          toast.error(
+            'Unable to fetch latest data for this city. Please check your network connection.',
+          );
         }
       })
       .catch((err) => err);
@@ -123,8 +126,10 @@ const City = () => {
         <NoteEditor
           value={text}
           onClick={() => {
-            saveNote(undefined, text, Name);
-            setText('');
+            const { success } = saveNote(undefined, text, Name);
+            if (success) {
+              setText('');
+            }
           }}
           onChange={(e) => setText(e.target.value)}
         />

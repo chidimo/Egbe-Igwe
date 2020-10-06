@@ -1,6 +1,10 @@
+import { toast } from 'react-toastify';
+
 import { useUserState } from '../auth/context/useUsers';
 import { EDIT_NOTE, NEW_NOTE } from '../notes/aTypes';
 import { useNotesDispatch } from '../notes/context/useNotes';
+
+const toastId = Symbol('id');
 
 export const useSaveNote = () => {
   const { username } = useUserState();
@@ -9,14 +13,17 @@ export const useSaveNote = () => {
   const saveNote = (id, text, Name) => {
     switch (true) {
     case text.length < 3:
-      alert('Note is too short');
-      return;
+      toast.error('Note is too short', { toastId });
+      return { success: false };
     case text.length > 100:
-      alert('Note is too long. Maximum allowed is 100 characters');
-      return;
+      toast.error('Note is too long. Maximum allowed is 100 characters', {
+        toastId,
+      });
+      return { success: false };
     case id === undefined:
       notesDispatch({ type: NEW_NOTE, text, username, Name });
-      return;
+      toast.success('Note saved successfully', { toastId });
+      return { success: true };
     default:
       notesDispatch({
         type: EDIT_NOTE,
@@ -24,7 +31,8 @@ export const useSaveNote = () => {
         text,
         username,
       });
-      return;
+      toast.success('Note saved successfully', { toastId });
+      return { success: true };
     }
   };
 

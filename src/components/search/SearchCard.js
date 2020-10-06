@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { LocatingLoader } from '../AppLoaders';
 
 import './search.scss';
@@ -25,6 +26,7 @@ export const SearchCard = (props) => {
         <div
           onClick={() => {
             setFetching(true);
+            toast.success('Location obtained. Redirecting');
             routeToCity(coords, setFetching);
           }}
         >
