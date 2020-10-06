@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import { LocatingLoader } from '../AppLoaders';
-import { getCurrentCityWeather } from '../city/actions';
-import { useWeatherDispatch } from '../city/context/useWeather';
 
 import './search.scss';
+import { useRouteToCity } from '../hooks/useRouteToCity';
 
 export const SearchCard = (props) => {
-  const history = useHistory();
-  const wDispatch = useWeatherDispatch();
   const [ fetching, setFetching ] = React.useState(false);
+
+  const { routeToCity } = useRouteToCity();
 
   const { city } = props;
   const { name, formatted_address, geometry } = city;
   const {
     location: { lat, lng },
   } = geometry;
+  const coords = `${lat},${lng}`;
 
   return (
     <div className="search-card pointer">
@@ -26,18 +25,7 @@ export const SearchCard = (props) => {
         <div
           onClick={() => {
             setFetching(true);
-            getCurrentCityWeather(`${lat}, ${lng}`)(wDispatch)
-              .then((res) => {
-                if (res.success) {
-                  const { name, lat, lon } = res.data.location;
-                  history.push({ pathname: `/city/${name}/${lat}, ${lon}` });
-                }
-              })
-              .catch((err) => {
-                alert('Unable to retrieve your location at this time.');
-                setFetching(false);
-                return err;
-              });
+            routeToCity(coords, setFetching);
           }}
         >
           <p className="name">{name}</p>

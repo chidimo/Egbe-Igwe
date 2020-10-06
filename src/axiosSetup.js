@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const wSAPI = 'http://api.weatherstack.com/';
+export const wSAPI = 'https://api.weatherstack.com/';
 export const gPlacesAPI =
   'https://maps.googleapis.com/maps/api/place/findplacefromtext/';
 

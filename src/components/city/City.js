@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { WA_WEATHER_DATA } from '../../utils/storeKeys';
-import { getCurrentCityWeather } from './actions';
+import { getCityWeather } from './actions';
 import { useWeatherDispatch, useWeatherState } from './context/useWeather';
 import { useNotesDispatch, useNotesState } from '../notes/context/useNotes';
 import { useUserDispatch, useUserState } from '../auth/context/useUsers';
@@ -41,10 +41,9 @@ const City = () => {
   const [ text, setText ] = React.useState('');
 
   const cityData = wInfo || JSON.parse(localStorage.getItem(WA_WEATHER_DATA));
-
   const cityWInfo = cityData[Name] || initWeatherData;
-  const { location, current } = cityWInfo;
 
+  const { location, current } = cityWInfo;
   const { country } = location;
 
   const { temperature: celcius, weather_descriptions, weather_icons } = current;
@@ -63,7 +62,7 @@ const City = () => {
     if (coords) {
       loc = coords;
     }
-    getCurrentCityWeather(loc)(wDispatch)
+    getCityWeather(loc)(wDispatch)
       .then((res) => {
         if (!res) {
           history.push({ pathname: '/' });

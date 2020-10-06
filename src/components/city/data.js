@@ -7,4 +7,5 @@ export const initWeatherData = {
     ],
     weather_descriptions: [],
   },
+  location: { country: '' },
 };

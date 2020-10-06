@@ -39,7 +39,7 @@ export const reducer = (state = {}, action) => {
     existingLikes.push(action.Name);
     lCities[state.username] = existingLikes;
 
-    const { cities,  } = JSON.parse(localStorage.getItem(WA_CITIES));
+    const { cities } = JSON.parse(localStorage.getItem(WA_CITIES));
 
     const city_exists = cities.filter((ct) => ct.Name === action.Name)[0];
     if (!city_exists) {

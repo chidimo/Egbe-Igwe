@@ -1,17 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { LocatingLoader } from '../AppLoaders';
-import { getCurrentCityWeather } from '../city/actions';
-import { useWeatherDispatch } from '../city/context/useWeather';
 import { IconSet } from '../IconSet';
+import { useRouteToCity } from '../hooks/useRouteToCity';
 
 import './search.scss';
 
 export const MyLocation = () => {
-  const history = useHistory();
-  const wDispatch = useWeatherDispatch();
-
   const [ isLocating, setLocating ] = React.useState(false);
+
+  const { routeToCity } = useRouteToCity();
 
   const promiseGeo = (options = {}) => {
     return new Promise((resolve, reject) => {
@@ -29,18 +26,8 @@ export const MyLocation = () => {
         .then((position) => {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
-
-          getCurrentCityWeather(`${lat}, ${lon}`)(wDispatch)
-            .then((res) => {
-              if (res.success) {
-                history.push({ pathname: `/city/${res.cityName}` });
-              }
-            })
-            .catch((err) => {
-              setLocating(false);
-              alert('Unable to retrieve your location at this time.');
-              return err;
-            });
+          const coords = `${lat},${lon}`;
+          routeToCity(coords, setLocating);
         })
         .catch(() => {
           alert('Unable to retrieve your location at this time.');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserState } from '../auth/context/useUsers';
-import { getCurrentCityWeather } from '../city/actions';
+import { getCityWeather } from '../city/actions';
 import { CityCard } from '../city/CityCard';
 
 import { useCitiesState } from '../city/context/useCities';
@@ -14,8 +14,8 @@ const Home = () => {
   const { likedCities } = useUserState();
 
   React.useEffect(() => {
-    cities.slice(0, 0).forEach((city) => {
-      getCurrentCityWeather(city.Name)(wDispatch);
+    cities.forEach((city) => {
+      getCityWeather(city.Name)(wDispatch);
     });
   }, [ cities, wDispatch ]);
 
