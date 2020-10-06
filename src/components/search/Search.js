@@ -108,6 +108,10 @@ export const Search = () => {
                 dispatch({ type: 'SET_ERROR', error: '' });
               }
               dispatch({ type: 'SET_QUERY', query: text });
+
+              if (text.length < 1) {
+                dispatch({ type: 'SET_OFFLINE', isOffline: false });
+              }
             }}
           />
         </div>
