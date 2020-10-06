@@ -29,18 +29,32 @@
 
 .display-search-results {
   z-index: 2;
+  padding: 0;
   position: fixed;
-  width: 50%;
-  background-color: lightblue;
-  margin-top: 4px;
+  border-radius: 6px;
+  width: 60%;
+  margin-top: 2px;
+  background-color: rgb(213, 230, 252);
+  box-shadow: -3px 3px 6px 0px #a79f9f;
 }
 
 .search-card {
   padding: 10px;
-  border: 1px solid;
-  border-radius: 6px;
+  border: 1px solid lightblue;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid;
+  }
 
   p {
     margin: 0;
+  }
+
+  p.name {
+    font-weight: bold;
+  }
+
+  p.address {
+    font-style: italic;
   }
 }

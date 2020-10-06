@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Loader from 'react-loader-spinner';
 
 export const FallBack = () => {
@@ -11,11 +12,25 @@ export const FallBack = () => {
         justifyContent: 'center',
       }}
     >
-      <Loader type="Oval" />
+      <Loader color="royalblue" type="Oval" />
     </div>
   );
 };
 
-export const LocatingLoader = () => {
-  return <Loader type="Puff" height={25} width={25} />;
+export const LocatingLoader = (props) => {
+  const { width, height, color } = props;
+  return (
+    <Loader
+      type="Oval"
+      width={width}
+      height={height}
+      color={color || 'royalblue'}
+    />
+  );
+};
+
+LocatingLoader.propTypes = {
+  color: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };

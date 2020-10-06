@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { IconSet } from '../IconSet';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +8,7 @@ import { DELIST_CITY } from './aTypes';
 import './city-card.scss';
 import { useCitiesDispatch } from './context/useCities';
 import { useWeatherState } from './context/useWeather';
+import { initWeatherData } from './data';
 
 export const CityCard = (props) => {
   const { city, isLiked, tabIndex } = props;
@@ -15,16 +18,8 @@ export const CityCard = (props) => {
 
   const {
     current: { temperature: celcius, weather_icons, observation_time },
-  } = wInfo[Name] || {
-    current: {
-      temperature: 20,
-      observation_time: '',
-      weather_icons: [
-        'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png',
-      ],
-    },
-  };
-  const fahrenheit = (celcius * 1.8 + 32).toFixed(2);
+  } = wInfo[Name] || initWeatherData;
+  const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
 
   return (
     <div className="city-card">
@@ -34,7 +29,11 @@ export const CityCard = (props) => {
             {Name}
           </Link>
 
-          {isLiked && <IconSet name="like" size={'1.7rem'} />}
+          {isLiked && (
+            <span>
+              <IconSet name="like" size={'1.7rem'} />
+            </span>
+          )}
 
           <div className="close-container pointer">
             <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>
@@ -61,4 +60,10 @@ export const CityCard = (props) => {
       <p>Prevailing conditions at {observation_time}</p>
     </div>
   );
+};
+
+CityCard.propTypes = {
+  city: PropTypes.object,
+  isLiked: PropTypes.bool,
+  tabIndex: PropTypes.number,
 };

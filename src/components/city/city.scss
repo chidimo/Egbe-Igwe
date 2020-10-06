@@ -10,7 +10,16 @@
   border-radius: 6px;
 }
 
+.city-country-name-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .city-country-name {
   color: royalblue;
   margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 5px;
+  font-size: 40px;
 }

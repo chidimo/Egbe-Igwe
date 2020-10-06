@@ -4,90 +4,102 @@ import { MyLocation } from './MyLocation';
 import { SearchCard } from './SearchCard';
 
 import './search.scss';
+import { LocatingLoader } from '../AppLoaders';
 
-const dum = [
-  // {
-  //   formatted_address: 'Benin',
-  //   geometry: {
-  //     location: {
-  //       lat: 9.30769,
-  //       lng: 2.315834,
-  //     },
-  //     viewport: {
-  //       northeast: {
-  //         lat: 12.4086111,
-  //         lng: 3.8433429,
-  //       },
-  //       southwest: {
-  //         lat: 6.2061001,
-  //         lng: 0.7754124000000001,
-  //       },
-  //     },
-  //   },
-  //   name: 'Benin',
-  // },
-  // {
-  //   formatted_address: 'C/590, Boulevard Saint Michel, Cotonou, Benin',
-  //   geometry: {
-  //     location: {
-  //       lat: 6.363815,
-  //       lng: 2.425785,
-  //     },
-  //     viewport: {
-  //       northeast: {
-  //         lat: 6.365158179892722,
-  //         lng: 2.427140129892722,
-  //       },
-  //       southwest: {
-  //         lat: 6.362458520107278,
-  //         lng: 2.424440470107277,
-  //       },
-  //     },
-  //   },
-  //   name: 'Accès Canada Benin',
-  // },
-];
+function debounce(fn, delay) {
+  let timeout;
+  return (...rest) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, rest), delay);
+  };
+}
 
 export const Search = () => {
-  const [error, setError] = React.useState('yihuihuihuiyugygy');
-  const [searches, setSearches] = React.useState(dum);
+  const [ query, setQuery ] = React.useState('');
+  const [ error, setError ] = React.useState('');
+  const [ searches, setSearches ] = React.useState([]);
+  const [ searching, setSearching ] = React.useState(false);
+
+  const isQuerying = query.length > 2;
+
+  const searchRsCont = React.useRef();
+  const inputCont = React.useRef();
+  const inpDivStyle = React.useRef();
+
+  React.useEffect(() => {
+    const resizeResultsDiv = () => {
+      inpDivStyle.current = window.getComputedStyle(inputCont.current, null);
+      const inpDivWidth = inpDivStyle.current.getPropertyValue('width');
+      searchRsCont.current.style.width = inpDivWidth;
+    };
+    resizeResultsDiv();
+
+    window.addEventListener('resize', resizeResultsDiv);
+    return () => window.removeEventListener('resize', resizeResultsDiv);
+  }, []);
+
+  const doSearch = React.useCallback(
+    debounce((term) => {
+      setSearching(true);
+      searchPlaces(term)
+        .then((res) => {
+          setSearching(false);
+          setSearches(res.candidates.slice(0, 4));
+        })
+        .catch((err) => {
+          setSearching(false);
+          return err;
+        });
+    }, 250),
+    [],
+  );
+
+  React.useEffect(() => {
+    if (isQuerying) doSearch(query);
+  }, [ query, isQuerying, doSearch ]);
 
   return (
     <div className="search">
-      {error && <span className="error">{error}</span>}
-
-      <div className="input-container">
-        <input
-          tabIndex="3"
-          type="text"
-          className={'search-city'}
-          placeholder="Find a city..."
-          onChange={(e) => {
-            const text = e.target.value;
-            if (text.length < 3) {
-              setError('Please enter at least 3 characters');
-              return;
-            }
-            setError('');
-            searchPlaces(text)
-              .then((res) => {
-                console.log('search res', res);
-                setSearches(res.candidates.slice(0, 5));
-              })
-              .catch((err) => {
-                console.log('search error', err);
-              });
-          }}
-        />
+      <div>
+        <div id="input-container" className="input-container">
+          <input
+            ref={(node) => (inputCont.current = node)}
+            tabIndex="3"
+            type="text"
+            value={query}
+            className={'search-city'}
+            placeholder="Find a city..."
+            onChange={(e) => {
+              const text = e.target.value;
+              if (text.length > 0 && text.length < 3) {
+                setError('Please enter at least 3 characters');
+              } else {
+                setError('');
+              }
+              setQuery(text);
+            }}
+          />
+        </div>
+        {error && <span className="error">{error}</span>}
+        <MyLocation />
       </div>
 
-      <div className="display-search-results">
-        {searches.map((sc, i) => {
-          return <SearchCard key={i} city={sc} />;
-        })}
+      <div
+        ref={(node) => (searchRsCont.current = node)}
+        id="display-search-results"
+        className="display-search-results"
+      >
+        {searching ? (
+          <LocatingLoader width={40} height={40} />
+        ) : (
+          <>
+            {isQuerying && searches.length === 0 && <p>No matching location</p>}
+            {searches.map((sc, i) => {
+              return <SearchCard key={i} city={sc} />;
+            })}
+          </>
+        )}
       </div>
-
-      <MyLocation />
     </div>
   );
 };
