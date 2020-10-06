@@ -9,7 +9,6 @@ export const CitiesDispatchCtx = React.createContext({});
 
 export const initState = {
   cities: [],
-  currentCity: { Population: 1 },
 };
 
 export const reducer = (state = {}, action) => {
@@ -24,14 +23,8 @@ export const reducer = (state = {}, action) => {
       ...state,
       cities: state.cities.filter((ct) => ct.rank !== action.rank),
     };
-  case GET_CITY: {
-    return {
-      ...state,
-      currentCity: {
-        ...state.cities.filter((ct) => ct.Name === action.Name)[0],
-      },
-    };
-  }
+  case GET_CITY:
+    return state;
   default:
     return state;
   }

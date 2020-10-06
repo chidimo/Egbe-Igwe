@@ -34,7 +34,7 @@ export default function App() {
     let cities = worldCities.slice(0, 15);
     const existing = JSON.parse(localStorage.getItem(WA_CITIES));
 
-    if (existing.cities) cities = existing.cities;
+    if (existing?.cities) cities = existing.cities;
     citiesDispatch({ type: GET_CITIES, cities });
   }, [ citiesDispatch ]);
 
