@@ -14,7 +14,7 @@ const Home = () => {
   const { likedCities } = useUserState();
 
   React.useEffect(() => {
-    cities.slice(0, 15).forEach((city) => {
+    cities.forEach((city) => {
       getCityWeather(city.Name)(wDispatch);
     });
   }, [ cities, wDispatch ]);
