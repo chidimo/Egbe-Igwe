@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { useSaveNote } from '../city/useSaveNote';
 import { NoteEditor } from './NoteEditor';
 import { IconSet } from '../IconSet';
 
 import './note.scss';
-import { useNotesDispatch } from './context/useNotes';
-import { DELETE_NOTE } from './aTypes';
-import { useUserState } from '../auth/context/useUsers';
-import { Link } from 'react-router-dom';
+import { useStoreDispatch } from '../../context/useStore';
+import { DELETE_NOTE } from '../../context/aTypes';
 
 export const Note = (props) => {
   const { note, indexPage } = props;
 
   const { saveNote } = useSaveNote();
-  const { username } = useUserState();
-  const notesDisaptch = useNotesDispatch();
+  const storeDispatch = useStoreDispatch();
 
   const [ text, setText ] = React.useState('');
   const [ editing, setEditing ] = React.useState(false);
@@ -52,7 +50,7 @@ export const Note = (props) => {
             <span
               onClick={() => {
                 if (window.confirm('Are you sure')) {
-                  notesDisaptch({ type: DELETE_NOTE, id: note.id, username });
+                  storeDispatch({ type: DELETE_NOTE, id: note.id });
                 }
               }}
             >

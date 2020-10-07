@@ -1,14 +1,11 @@
 import { toast } from 'react-toastify';
-
-import { useUserState } from '../auth/context/useUsers';
-import { EDIT_NOTE, NEW_NOTE } from '../notes/aTypes';
-import { useNotesDispatch } from '../notes/context/useNotes';
+import { EDIT_NOTE, NEW_NOTE } from '../../context/aTypes';
+import { useStoreDispatch } from '../../context/useStore';
 
 const toastId = Symbol('id');
 
 export const useSaveNote = () => {
-  const { username } = useUserState();
-  const notesDispatch = useNotesDispatch();
+  const storeDispatch = useStoreDispatch();
 
   const saveNote = (id, text, Name) => {
     switch (true) {
@@ -21,15 +18,14 @@ export const useSaveNote = () => {
       });
       return { success: false };
     case id === undefined:
-      notesDispatch({ type: NEW_NOTE, text, username, Name });
+      storeDispatch({ type: NEW_NOTE, text, Name });
       toast.success('Note saved successfully', { toastId });
       return { success: true };
     default:
-      notesDispatch({
+      storeDispatch({
         type: EDIT_NOTE,
         id,
         text,
-        username,
       });
       toast.success('Note saved successfully', { toastId });
       return { success: true };

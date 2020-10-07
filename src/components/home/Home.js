@@ -1,23 +1,23 @@
 import React from 'react';
-import { useUserState } from '../auth/context/useUsers';
+import { useStoreDispatch, useStoreState } from '../../context/useStore';
 import { getCityWeather } from '../city/actions';
 import { CityCard } from '../city/CityCard';
 
-import { useCitiesState } from '../city/context/useCities';
-import { useWeatherDispatch } from '../city/context/useWeather';
 import { Search } from '../search/Search';
 import './home.scss';
 
 const Home = () => {
-  const { cities } = useCitiesState();
-  const wDispatch = useWeatherDispatch();
-  const { likedCities } = useUserState();
+  const {
+    cities,
+    currentUser: { likedCities },
+  } = useStoreState();
+  const storeDispatch = useStoreDispatch();
 
   React.useEffect(() => {
     cities.forEach((city) => {
-      getCityWeather(city.Name)(wDispatch);
+      getCityWeather(city.Name)(storeDispatch);
     });
-  }, [ cities, wDispatch ]);
+  }, [ cities, storeDispatch ]);
 
   return (
     <div className="direct-main-child home-container">

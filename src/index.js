@@ -3,28 +3,19 @@ import ReactDOM from 'react-dom';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import App from './App';
-import { NotesProvider } from './components/notes/context/NotesCtx';
-import { CitiesProvider } from './components/city/context/CitiesCtx';
-import { WeatherProvider } from './components/city/context/WeatherCtx';
-import { UserProvider } from './components/auth/context/UserCtx';
 
 import * as serviceWorker from './serviceWorker';
 
 import './index.css';
+import { StoreProvider } from './context/StoreCtx';
 
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <React.StrictMode>
-    <WeatherProvider>
-      <CitiesProvider>
-        <NotesProvider>
-          <UserProvider>
-            <App />
-          </UserProvider>
-        </NotesProvider>
-      </CitiesProvider>
-    </WeatherProvider>
+    <StoreProvider>
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
   rootElement,
 );

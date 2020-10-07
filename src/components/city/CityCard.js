@@ -4,21 +4,22 @@ import PropTypes from 'prop-types';
 import { IconSet } from '../IconSet';
 import { Link } from 'react-router-dom';
 
-import { DELIST_CITY } from './aTypes';
 import './city-card.scss';
-import { useCitiesDispatch } from './context/useCities';
-import { useWeatherState } from './context/useWeather';
 import { initWeatherData } from './data';
+import { useStoreDispatch, useStoreState } from '../../context/useStore';
+import { DELIST_CITY } from '../../context/aTypes';
 
 export const CityCard = (props) => {
   const { city, isLiked, tabIndex } = props;
-  const { rank, Name } = city;
-  const wInfo = useWeatherState();
-  const citiesDispatch = useCitiesDispatch();
+  const { Name } = city;
+  const { weather } = useStoreState();
+  const storeDispatch = useStoreDispatch();
+
+  const wInfo = weather[Name] || initWeatherData;
 
   const {
     current: { temperature: celcius, weather_icons, observation_time },
-  } = wInfo[Name] || initWeatherData;
+  } = wInfo;
   const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
 
   return (
@@ -36,7 +37,7 @@ export const CityCard = (props) => {
           )}
 
           <div className="close-container pointer">
-            <span onClick={() => citiesDispatch({ type: DELIST_CITY, rank })}>
+            <span onClick={() => storeDispatch({ type: DELIST_CITY, Name })}>
               <IconSet name="cancel" color="red" size="1.7rem" />
             </span>
           </div>

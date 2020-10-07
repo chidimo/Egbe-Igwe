@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { gPlacesAPI, wSAPI } from '../../axiosSetup';
-import { GET_W_DATA } from './aTypes';
+import { GET_W_DATA } from '../../context/aTypes';
 
 const WS_API_KEY = process.env.REACT_APP_WS_KEY;
 const GP_API_KEY = process.env.REACT_APP_GPLACES_KEY;

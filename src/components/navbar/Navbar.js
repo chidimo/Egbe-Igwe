@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { LOGOUT } from '../auth/aTypes';
-import { useUserDispatch, useUserState } from '../auth/context/useUsers';
+import { useStoreDispatch, useStoreState } from '../../context/useStore';
+import { LOGOUT } from '../../context/aTypes';
 
 import './navbar.scss';
 
 export const Navbar = () => {
   const history = useHistory();
-  const { username } = useUserState();
-  const userDispatch = useUserDispatch();
+  const {
+    currentUser: { username },
+  } = useStoreState();
+  const storeDispatch = useStoreDispatch();
   return (
     <header>
       <nav role="navigation">
@@ -27,7 +29,7 @@ export const Navbar = () => {
             <button
               className="logout pointer"
               onClick={() => {
-                userDispatch({ type: LOGOUT });
+                storeDispatch({ type: LOGOUT });
                 history.push({ pathname: '/' });
               }}
             >

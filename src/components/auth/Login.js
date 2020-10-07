@@ -2,18 +2,18 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import './auth.scss';
-import { useUserDispatch } from './context/useUsers';
-import { LOGIN } from './aTypes';
+import { useStoreDispatch } from '../../context/useStore';
+import { LOGIN } from '../../context/aTypes';
 
 const Login = () => {
-  const userDispatch = useUserDispatch();
+  const storeDispatch = useStoreDispatch();
   const [ username, setUsername ] = React.useState('');
 
   const submit = () => {
     if (!username) {
       toast.error('Please enter a username');
     } else {
-      userDispatch({ type: LOGIN, username });
+      storeDispatch({ type: LOGIN, username });
     }
   };
 

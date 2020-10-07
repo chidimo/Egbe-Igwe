@@ -1,70 +1,52 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
-import { toast } from 'react-toastify';
-
 import { useHistory, useParams } from 'react-router-dom';
-import { WA_WEATHER_DATA } from '../../utils/storeKeys';
-import { getCityWeather } from './actions';
-import { useWeatherDispatch, useWeatherState } from './context/useWeather';
-import { useNotesDispatch, useNotesState } from '../notes/context/useNotes';
-import { useUserDispatch, useUserState } from '../auth/context/useUsers';
-import { LOAD_NOTES } from '../notes/aTypes';
+
 import { Note } from '../notes/Note';
 import { useSaveNote } from './useSaveNote';
 import { NoteEditor } from '../notes/NoteEditor';
-import { useCitiesDispatch } from './context/useCities';
 
 import './city.scss';
-import { GET_CITY } from './aTypes';
 import { IconSet } from '../IconSet';
-import { LIKE_CITY, UNLIKE_CITY } from '../auth/aTypes';
-import { initWeatherData } from './data';
+import { GET_CITY, LIKE_CITY, UNLIKE_CITY } from '../../context/aTypes';
+import { useStoreDispatch, useStoreState } from '../../context/useStore';
+import { getCityWeather } from './actions';
+import { toast } from 'react-toastify';
 
 const City = () => {
-  const { Name, coords } = useParams();
   const history = useHistory();
-  const { username, likedCities } = useUserState();
-  const userDispatch = useUserDispatch();
+  const { Name, coords } = useParams();
 
-  const citiesDispatch = useCitiesDispatch();
+  const {
+    currentCity,
+    currentUser: { likedCities, notes },
+  } = useStoreState();
+  const storeDispatch = useStoreDispatch();
 
-  const wInfo = useWeatherState();
-  const wDispatch = useWeatherDispatch();
-
-  const { saveNote } = useSaveNote();
-
-  const notes = useNotesState();
-  const notesDispatch = useNotesDispatch();
-  const myNotes = notes[username];
-
-  const cityNotes = myNotes
-    // ?.sort((a, b) => b.id - a.id)
-    ?.filter((nt) => nt.city === Name);
-
-  const [ text, setText ] = React.useState('');
-
-  const cityData = wInfo || JSON.parse(localStorage.getItem(WA_WEATHER_DATA));
-  const cityWInfo = cityData[Name] || initWeatherData;
-
-  const { location, current } = cityWInfo;
+  const { location, current } = currentCity.weatherInfo;
   const { country } = location;
 
   const { temperature: celcius, weather_descriptions, weather_icons } = current;
   const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
 
-  React.useEffect(() => {
-    citiesDispatch({ type: GET_CITY, Name });
-  }, [ Name, citiesDispatch ]);
+  const { saveNote } = useSaveNote();
+
+  const cityNotes = notes?.filter((nt) => nt.city === Name);
+
+  const [ text, setText ] = React.useState('');
 
   React.useEffect(() => {
-    notesDispatch({ type: LOAD_NOTES, username });
-  }, [ notesDispatch, username ]);
+    // I only have this in case API call fails,
+    // I'll pull existing data and display on screen
+    storeDispatch({ type: GET_CITY, Name });
+  }, [ Name, storeDispatch ]);
 
   React.useEffect(() => {
     let loc = Name;
     if (coords) {
       loc = coords;
     }
-    getCityWeather(loc)(wDispatch)
+    getCityWeather(loc)(storeDispatch)
       .then((res) => {
         if (!res) {
           toast.error(
@@ -73,7 +55,7 @@ const City = () => {
         }
       })
       .catch((err) => err);
-  }, [ Name, coords, history, wDispatch ]);
+  }, [ Name, coords, history, storeDispatch ]);
 
   return (
     <div className="direct-main-child city-page">
@@ -83,20 +65,20 @@ const City = () => {
         </p>
         <div>
           {likedCities.includes(Name) ? (
-            <span
-              className="pointer"
-              onClick={() => {
-                userDispatch({ type: UNLIKE_CITY, Name });
-              }}
-            >
-              <IconSet name="like" size={'1.7rem'} />
+            <span className="pointer">
+              <IconSet
+                name="like"
+                size={'1.7rem'}
+                onClick={() => storeDispatch({ type: UNLIKE_CITY, Name })}
+              />
             </span>
           ) : (
-            <span
-              className="pointer"
-              onClick={() => userDispatch({ type: LIKE_CITY, Name, country })}
-            >
-              <IconSet name="unlike" size={'1.7rem'} />
+            <span className="pointer">
+              <IconSet
+                name="unlike"
+                size={'1.7rem'}
+                onClick={() => storeDispatch({ type: LIKE_CITY, Name, country })}
+              />
             </span>
           )}
         </div>

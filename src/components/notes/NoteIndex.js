@@ -1,31 +1,23 @@
 import React from 'react';
-import { useNotesDispatch, useNotesState } from './context/useNotes';
-import { useUserState } from '../auth/context/useUsers';
-import { LOAD_NOTES } from './aTypes';
 import { Note } from './Note';
 import '../city/city.scss';
+import { useStoreState } from '../../context/useStore';
 
 const NoteIndex = () => {
-  const { username } = useUserState();
-
-  const notes = useNotesState();
-  const notesDispatch = useNotesDispatch();
-  const myNotes = notes[username];
-
-  React.useEffect(() => {
-    notesDispatch({ type: LOAD_NOTES, username });
-  }, [ notesDispatch, username ]);
+  const {
+    currentUser: { notes },
+  } = useStoreState();
 
   return (
     <div className="direct-main-child notes-page">
       <h2>My notes</h2>
 
       <div>
-        {myNotes?.length === 0 ? (
+        {notes?.length === 0 ? (
           <p>Visit a city page to create some notes</p>
         ) : (
           <>
-            {myNotes
+            {notes
               ?.sort((a, b) =>
                 a.city.localeCompare(b.city, { sensitivity: 'base' }),
               )
