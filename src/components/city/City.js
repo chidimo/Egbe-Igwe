@@ -8,7 +8,7 @@ import { NoteEditor } from '../notes/NoteEditor';
 
 import './city.scss';
 import { IconSet } from '../IconSet';
-import { GET_CITY, LIKE_CITY, UNLIKE_CITY } from '../../context/aTypes';
+import { CLEAN_CITY, GET_CITY, LIKE_CITY, UNLIKE_CITY } from '../../context/aTypes';
 import { useStoreDispatch, useStoreState } from '../../context/useStore';
 import { getCityWeather } from './actions';
 import { toast } from 'react-toastify';
@@ -39,6 +39,8 @@ const City = () => {
     // I only have this in case API call fails,
     // I'll pull existing data and display on screen
     storeDispatch({ type: GET_CITY, Name });
+    return () => storeDispatch({ type: CLEAN_CITY })
+
   }, [ Name, storeDispatch ]);
 
   React.useEffect(() => {

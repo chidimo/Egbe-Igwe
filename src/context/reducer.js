@@ -12,12 +12,11 @@ import {
   NEW_NOTE,
   EDIT_NOTE,
   DELETE_NOTE,
-  LOAD_STORE_TO_MEMORY,
+  LOAD_STORE_TO_MEMORY, CLEAN_CITY
 } from './aTypes';
 import { initStoreState, store, initWeatherInfo } from './store';
 
 export const reducer = (state = {}, action) => {
-  console.log('ACTION', action);
   switch (action.type) {
   case LOAD_STORE_TO_MEMORY: {
     const name = state.currentUser.username;
@@ -84,6 +83,14 @@ export const reducer = (state = {}, action) => {
       },
     };
     store.saveState(updated);
+    return updated;
+  }
+
+  case CLEAN_CITY: {
+    const updated = {
+      ...state,
+      currentCity: initStoreState.currentCity,
+    };
     return updated;
   }
 
