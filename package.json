@@ -21,10 +21,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint ./src",
-    "pretty": "prettier --write '**/*.{ts,js,scss,html,json,md}' '!build/**' '!public/**'",
+    "pretty": "prettier --write '**/*.{ts,js,scss,html,json,md}' '!build/**' '!public/**' '!coverage/**'",
     "postpretty": "yarn lint --fix && git add ."
   },
   "eslintConfig": {
@@ -43,6 +43,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-react": "^7.21.3"
   }

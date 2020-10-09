@@ -94,6 +94,7 @@ export const Search = () => {
             ref={(node) => (inputCont.current = node)}
             tabIndex="3"
             type="text"
+            data-testid="search"
             value={info.query}
             className={'search-city'}
             placeholder="Find a city..."
