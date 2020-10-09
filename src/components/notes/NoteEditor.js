@@ -11,6 +11,7 @@ export const NoteEditor = (props) => {
       <textarea
         id={id}
         value={value}
+        className="fixed-height"
         placeholder="Enter notes"
         onChange={onChange}
         onBlur={onBlur || null}

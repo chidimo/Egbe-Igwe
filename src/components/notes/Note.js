@@ -16,8 +16,15 @@ export const Note = (props) => {
   const { saveNote } = useSaveNote();
   const storeDispatch = useStoreDispatch();
 
+  const rf = React.useRef();
   const [ text, setText ] = React.useState('');
   const [ editing, setEditing ] = React.useState(false);
+
+  React.useEffect(() => {
+    if (rf.current) {
+      rf.current.style.height = rf.current.scrollHeight + 'px';
+    }
+  }, []);
 
   React.useEffect(() => {
     setText(note.text);
@@ -66,6 +73,7 @@ export const Note = (props) => {
               onChange={() => {}}
               onFocus={activateEditor}
               onClick={activateEditor}
+              ref={(node) => (rf.current = node)}
             />
           </div>
 

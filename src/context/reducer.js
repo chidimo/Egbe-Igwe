@@ -3,16 +3,17 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   LOGIN,
   LOGOUT,
-  LIKE_CITY,
-  GET_W_DATA,
-  UNLIKE_CITY,
   GET_CITY,
+  LIKE_CITY,
+  CLEAN_CITY,
   DELIST_CITY,
   ENLIST_CITY,
+  UNLIKE_CITY,
+  GET_W_DATA,
   NEW_NOTE,
   EDIT_NOTE,
   DELETE_NOTE,
-  LOAD_STORE_TO_MEMORY, CLEAN_CITY
+  LOAD_STORE_TO_MEMORY,
 } from './aTypes';
 import { initStoreState, store, initWeatherInfo } from './store';
 
