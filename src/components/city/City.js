@@ -97,12 +97,7 @@ const City = () => {
             return <p key={i}>{wd}</p>;
           })}
         </div>
-        <p>
-          Latitude {location.lat}, Longitude {location.lon}
-        </p>
-        <p>Local time: {location.localtime}</p>
         <div>
-          <h4>Current weather conditions</h4>
           <p>
             {celcius} <span className="symbol">&#8451;</span> ({fahrenheit}{' '}
             &#x2109;)
@@ -112,6 +107,7 @@ const City = () => {
 
       <div className="city-notes-list">
         <NoteEditor
+          dataTestId={'new-note'}
           value={text}
           onClick={() => {
             const { success } = saveNote(undefined, text, Name);

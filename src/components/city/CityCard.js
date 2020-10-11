@@ -18,15 +18,20 @@ export const CityCard = (props) => {
   const wInfo = weather[Name] || initWeatherData;
 
   const {
-    current: { temperature: celcius, weather_icons, observation_time },
+    current: { temperature: celcius, weather_icons },
   } = wInfo;
   const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
 
   return (
-    <div className="city-card">
+    <div className="city-card" data-testid="city-card">
       <div className="city-cart--1-3">
         <div className="name-section">
-          <Link to={`/city/${Name}`} tabIndex={tabIndex} className="city-name">
+          <Link
+            data-testid={`city-link-${tabIndex}`}
+            to={`/city/${Name}`}
+            tabIndex={tabIndex}
+            className="city-name"
+          >
             {Name}
           </Link>
 
@@ -37,13 +42,15 @@ export const CityCard = (props) => {
           )}
 
           <div className="close-container pointer">
-            <span onClick={() => storeDispatch({ type: DELIST_CITY, Name })}>
+            <span
+              data-testid={`remove-city-${tabIndex}`}
+              onClick={() => storeDispatch({ type: DELIST_CITY, Name })}
+            >
               <IconSet name="cancel" color="red" size="1.7rem" />
             </span>
           </div>
         </div>
       </div>
-
       <div className="city-cart--2-3">
         <img
           className="weather-icon"
@@ -51,14 +58,12 @@ export const CityCard = (props) => {
           alt="Weather icon"
         />
       </div>
-
       <div className="city-card--3-3">
         <p className="main-temp">
           {celcius} <span className="symbol">&#8451;</span>
         </p>
         <p className="minor-temp">{fahrenheit} &#x2109;</p>
-      </div>
-      <p>Prevailing conditions at {observation_time}</p>
+      </div>{' '}
     </div>
   );
 };

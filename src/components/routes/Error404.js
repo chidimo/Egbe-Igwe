@@ -9,7 +9,7 @@ export const Error404 = () => {
   });
 
   return (
-    <div data-testid="error-404" className="error__404--parent">
+    <div className="error__404--parent">
       <div>
         <p>
           The requested url{' '}

@@ -5,5 +5,5 @@
 1. Redesign UI
 
 ```cmd
-yarn add @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-transform-react-remove-prop-types --dev
+yarn add @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-transform-react-remove-prop-types eslint-plugin-jest-dom eslint-plugin-testing-library --dev
 ```

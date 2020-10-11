@@ -1,0 +1,16 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.fontSize": 13,
+  "jest.pathToJest": "yarn test",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [""],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "workbench.preferredDarkColorTheme": "Visual Studio Dark"
+}

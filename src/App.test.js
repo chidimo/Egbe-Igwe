@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('<App />', () => {
-  it('Renders <App /> component correctly', async () => {
+  it('<App />', async () => {
     render(<App />);
     expect(true).toBe(true);
   });
@@ -22,23 +22,24 @@ describe('<App />', () => {
   it('logs in and logs out user', async () => {
     render(<App />);
 
-    const btn = screen.getByTestId('login-btn');
-    const login = screen.getByTestId('username-input');
+    const btn = screen.getByRole('button', { name: /login/i });
+    const login = screen.getByRole('textbox', { name: '' });
     userEvent.type(login, 'chidimo');
     expect(login).toHaveValue('chidimo');
 
     // login
     userEvent.click(btn);
-    const userName = screen.getByTestId('username');
+    const userName = screen.getByText(/chidimo/);
+
     expect(userName).toBeInTheDocument();
     expect(userName.text).toEqual('chidimo');
 
     await waitForElementToBeRemoved(() => screen.getByText(/Fallback/i));
 
-    expect(screen.getByTestId('search')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: '' })).toBeInTheDocument();
 
     // logout
-    userEvent.click(screen.getByTestId('logout-btn'));
-    expect(screen.getByTestId('username-input')).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button', { name: /logout/i }));
+    expect(screen.getByRole('textbox', { name: '' })).toBeInTheDocument();
   });
 });

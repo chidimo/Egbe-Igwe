@@ -39,7 +39,7 @@ class ErrorBoundary extends React.Component {
     const {hasError} = this.state;
     if (hasError) {
       return (
-        <div className="error__boundary--parent" data-testid="error-boundary">
+        <div className="error__boundary--parent">
           <div className="error__boundary--body">
             <p>
               There was an error in loading this page.{' '}

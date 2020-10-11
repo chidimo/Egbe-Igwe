@@ -25,7 +25,7 @@ const Login = () => {
         <div className="div-input">
           <input
             type="text"
-            data-testid="username-input"
+            id="username"
             value={username}
             placeholder="Enter a username"
             onChange={(e) => setUsername(e.target.value)}
@@ -36,11 +36,7 @@ const Login = () => {
             }}
           />
         </div>
-        <button
-          data-testid="login-btn"
-          className="pointer"
-          onClick={() => submit()}
-        >
+        <button id="login-btn" className="pointer" onClick={() => submit()}>
           Login
         </button>
       </div>

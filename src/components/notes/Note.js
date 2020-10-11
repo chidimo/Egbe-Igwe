@@ -42,6 +42,7 @@ export const Note = (props) => {
       {editing ? (
         <>
           <NoteEditor
+            dataTestId={'saved-note'}
             id={note.id}
             value={text}
             onBlur={() => {
@@ -55,6 +56,7 @@ export const Note = (props) => {
         <div className="note-container">
           <div className="close-container pointer">
             <span
+              data-testid="delete-note"
               onClick={() => {
                 if (window.confirm('Are you sure')) {
                   storeDispatch({ type: DELETE_NOTE, id: note.id });
@@ -67,6 +69,7 @@ export const Note = (props) => {
 
           <div className="textarea-container">
             <textarea
+              data-testid={'saved-note'}
               value={note.text}
               placeholder="Enter notes"
               className="disabled"

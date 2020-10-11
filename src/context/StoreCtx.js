@@ -12,6 +12,7 @@ export const StoreProvider = ({ children }) => {
     reducer,
     initStore.getState(),
   );
+  // console.log('store', store)
 
   return (
     <StoreStateCtx.Provider value={store}>

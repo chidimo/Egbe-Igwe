@@ -22,14 +22,13 @@ export const Navbar = () => {
 
         <div className="right-side">
           <div className="username">
-            <Link data-testid="username" to={'/notes'}>
+            <Link role="link" to={'/notes'}>
               {username}
             </Link>
           </div>
 
           <div>
             <button
-              data-testid="logout-btn"
               className="logout pointer"
               onClick={() => {
                 storeDispatch({ type: LOGOUT });

@@ -14,6 +14,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:jest/recommended',
+    'plugin:jest-dom/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -26,7 +27,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest'],
+  plugins: ['react', 'jest', 'testing-library'],
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
