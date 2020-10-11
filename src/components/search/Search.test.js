@@ -10,7 +10,7 @@ import {
 
 import App from '../../App';
 
-describe.skip('SEARCH FEATURE', () => {
+describe('SEARCH FEATURE', () => {
   it('can search for city', async () => {
     // mock debounce such that it doesn't delay the function
     jest.spyOn(utFuncs, 'debounce').mockImplementation((fn) => fn);

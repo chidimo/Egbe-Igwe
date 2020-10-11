@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
 }));
 
-describe.skip('NOTES FEATURES', () => {
+describe('NOTES FEATURES', () => {
   const { confirm } = window;
 
   beforeAll(() => {
