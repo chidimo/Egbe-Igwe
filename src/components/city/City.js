@@ -109,7 +109,7 @@ const City = () => {
               })}
             </div>
             <div>
-              <p>
+              <p className='temp'>
                 {celcius} <span className="symbol">&#8451;</span> (
                 {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
               </p>
