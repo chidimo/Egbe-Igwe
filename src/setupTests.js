@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 const mockGeolocation = {
   watchPosition: jest.fn(),
-  getCurrentPosition: jest.fn().mockImplementation((success, err) => {
+  getCurrentPosition: jest.fn().mockImplementation((success) => {
     // if (err) {
     //   err('Unable to locate you.');
     // }

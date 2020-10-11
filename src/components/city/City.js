@@ -20,7 +20,10 @@ import { toast } from 'react-toastify';
 
 const City = () => {
   const history = useHistory();
+  const { saveNote } = useSaveNote();
   const { Name, coords } = useParams();
+
+  const [ text, setText ] = React.useState('');
 
   const {
     currentCity,
@@ -28,17 +31,13 @@ const City = () => {
   } = useStoreState();
   const storeDispatch = useStoreDispatch();
 
-  const { location, current } = currentCity.weatherInfo;
-  const { country } = location;
-
-  const { temperature: celcius, weather_descriptions, weather_icons } = current;
-  const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
-
-  const { saveNote } = useSaveNote();
+  const {
+    current,
+    location: { country },
+  } = currentCity.weatherInfo;
 
   const cityNotes = notes?.filter((nt) => nt.city === Name);
-
-  const [ text, setText ] = React.useState('');
+  const { temperature: celcius, weather_descriptions, weather_icons } = current;
 
   React.useEffect(() => {
     // I only have this in case API call fails,
@@ -66,7 +65,7 @@ const City = () => {
   return (
     <div className="direct-main-child city-page">
       <div className="city-country-name-cont">
-        <p className="city-country-name">
+        <p className="page-heading">
           {Name}, {country}{' '}
         </p>
         <div>
@@ -91,7 +90,11 @@ const City = () => {
       </div>
 
       <div className="city-info">
-        <img src={weather_icons[0]} alt="Weather icon" />
+        <img
+          className="weather-icon"
+          src={weather_icons[0]}
+          alt="Weather icon"
+        />
         <div>
           {weather_descriptions.map((wd, i) => {
             return <p key={i}>{wd}</p>;
@@ -99,8 +102,8 @@ const City = () => {
         </div>
         <div>
           <p>
-            {celcius} <span className="symbol">&#8451;</span> ({fahrenheit}{' '}
-            &#x2109;)
+            {celcius} <span className="symbol">&#8451;</span> (
+            {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
           </p>
         </div>
       </div>

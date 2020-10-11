@@ -11,6 +11,7 @@ export const Navbar = () => {
     currentUser: { username },
   } = useStoreState();
   const storeDispatch = useStoreDispatch();
+
   return (
     <header>
       <nav role="navigation">

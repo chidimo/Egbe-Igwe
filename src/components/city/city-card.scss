@@ -6,7 +6,7 @@
   text-align: center;
   margin-bottom: 25px;
   border-radius: 6px;
-  border: 1px solid #96b4e4;
+  border: 1px solid royalblue;
   box-shadow: -3px 3px 6px 0px #a79f9f;
 }
 
@@ -22,17 +22,9 @@
   }
 }
 
-.city-cart--2-3 {
-  .weather-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-  }
-}
-
 .city-card--3-3 {
   p.main-temp {
-    font-size: 30px;
+    font-size: 34px;
     font-weight: bold;
   }
 

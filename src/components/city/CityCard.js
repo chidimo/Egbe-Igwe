@@ -10,27 +10,27 @@ import { useStoreDispatch, useStoreState } from '../../context/useStore';
 import { DELIST_CITY } from '../../context/aTypes';
 
 export const CityCard = (props) => {
-  const { city, isLiked, tabIndex } = props;
-  const { Name } = city;
+  const {
+    isLiked,
+    tabIndex,
+    city: { Name },
+  } = props;
   const { weather } = useStoreState();
   const storeDispatch = useStoreDispatch();
 
-  const wInfo = weather[Name] || initWeatherData;
-
   const {
     current: { temperature: celcius, weather_icons },
-  } = wInfo;
-  const fahrenheit = (celcius * 1.8 + 32).toFixed(1);
+  } = weather[Name] || initWeatherData;
 
   return (
     <div className="city-card" data-testid="city-card">
       <div className="city-cart--1-3">
         <div className="name-section">
           <Link
-            data-testid={`city-link-${tabIndex}`}
             to={`/city/${Name}`}
             tabIndex={tabIndex}
             className="city-name"
+            data-testid={`city-link-${tabIndex}`}
           >
             {Name}
           </Link>
@@ -62,7 +62,9 @@ export const CityCard = (props) => {
         <p className="main-temp">
           {celcius} <span className="symbol">&#8451;</span>
         </p>
-        <p className="minor-temp">{fahrenheit} &#x2109;</p>
+        <p className="minor-temp">
+          ({(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
+        </p>
       </div>{' '}
     </div>
   );

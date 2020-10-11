@@ -20,7 +20,7 @@ export const NoteEditor = (props) => {
 
       {onClick && (
         <div>
-          <button className="pointer" onClick={onClick}>
+          <button className="shadow pointer" onClick={onClick}>
             Save
           </button>
         </div>

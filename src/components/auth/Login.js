@@ -36,7 +36,11 @@ const Login = () => {
             }}
           />
         </div>
-        <button id="login-btn" className="pointer" onClick={() => submit()}>
+        <button
+          id="login-btn"
+          className="shadow pointer"
+          onClick={() => submit()}
+        >
           Login
         </button>
       </div>

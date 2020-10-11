@@ -5,9 +5,7 @@
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": [
-          ""
-        ],
+        "scope": [""],
         "settings": {
           "fontStyle": "italic"
         }
@@ -18,7 +16,7 @@
   "workbench.colorTheme": "Material Theme Ocean",
   "workbench.colorCustomizations": {
     // "[Community Material Theme Ocean]": {
-      "titleBar.activeBackground": "#07F",
+    "titleBar.activeBackground": "#07F"
     // }
   }
 }

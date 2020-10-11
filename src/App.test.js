@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
 }));
 
-describe('<App />', () => {
+describe('AUTH FEATURE', () => {
   it('<App />', async () => {
     render(<App />);
     expect(true).toBe(true);
