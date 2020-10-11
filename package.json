@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --env=jest-environment-jsdom-fourteen",
+    "test": "DEBUG_PRINT_LIMIT=7000 jest --env=jest-environment-jsdom-fourteen",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{ts,js,scss,html,json,md}' '!build/**' '!public/**' '!coverage/**'",

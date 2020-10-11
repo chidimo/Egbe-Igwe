@@ -5,14 +5,7 @@ import { SearchCard } from './SearchCard';
 
 import './search.scss';
 import { LocatingLoader } from '../AppLoaders';
-
-function debounce(fn, delay) {
-  let timeout;
-  return (...rest) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn.apply(this, rest), delay);
-  };
-}
+import { debounce } from '../../utils/debounce';
 
 export const Search = () => {
   const reducer = (state = {}, action) => {
@@ -116,7 +109,11 @@ export const Search = () => {
             }}
           />
         </div>
-        {info.error && <span className="error">{info.error}</span>}
+        {info.error && (
+          <span data-testid="error-box" className="error">
+            {info.error}
+          </span>
+        )}
         <MyLocation />
       </div>
 

@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
 }));
 
-describe('<App />', () => {
+describe('NOTES FEATURES', () => {
   const { confirm } = window;
 
   beforeAll(() => {
@@ -25,6 +25,7 @@ describe('<App />', () => {
   afterAll(() => {
     window.confirm = confirm;
   });
+
   it('can save, edit and delete note', async () => {
     render(<App />);
 
@@ -34,7 +35,7 @@ describe('<App />', () => {
     userEvent.click(btn);
 
     expect(screen.getByText(/chidimo/)).toBeInTheDocument();
-    await waitForElementToBeRemoved(() => screen.getByText(/Fallback/i));
+    await waitForElementToBeRemoved(() => screen.getByText(/fallback/i));
 
     // assert that there are 15 items on the list
     const allCards = screen.getAllByTestId('city-card');
@@ -52,7 +53,7 @@ describe('<App />', () => {
 
     // click on the first item
     userEvent.click(screen.getByTestId('city-link-5'));
-    await waitForElementToBeRemoved(() => screen.getByText(/Fallback/i));
+    await waitForElementToBeRemoved(() => screen.getByText(/fallback/i));
     expect(true).toBe(true);
 
     // CREATE NOTE
@@ -110,8 +111,9 @@ describe('<App />', () => {
 
     // VISIT ALL NOTES PAGE
     userEvent.click(screen.getByRole('link', { name: 'chidimo' }));
-    await waitForElementToBeRemoved(() => screen.getByText(/Fallback/i));
-    expect(screen.getByRole('heading', { name : /my notes/i })).toBeInTheDocument();
-
+    await waitForElementToBeRemoved(() => screen.getByText(/fallback/i));
+    expect(
+      screen.getByRole('heading', { name: /my notes/i }),
+    ).toBeInTheDocument();
   });
 });

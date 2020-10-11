@@ -24,13 +24,17 @@ export const SearchCard = (props) => {
         <LocatingLoader color="royalblue" height={40} width={40} />
       ) : (
         <div
+          role="link"
+          data-testid={name}
           onClick={() => {
             setFetching(true);
             toast.success('Location obtained. Redirecting');
             routeToCity(coords, setFetching);
           }}
         >
-          <p className="name">{name}</p>
+          <p className="name" role="heading">
+            {name}
+          </p>
           <p className="address">{formatted_address}</p>
         </div>
       )}

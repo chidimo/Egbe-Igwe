@@ -8,18 +8,17 @@ import { useRouteToCity } from '../hooks/useRouteToCity';
 import './search.scss';
 
 export const MyLocation = () => {
+  const gl = window.navigator.geolocation;
   const [ isLocating, setLocating ] = React.useState(false);
 
   const { routeToCity } = useRouteToCity();
 
-  const promiseGeo = (options = {}) => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+  const promiseGeo = (options = {}) =>
+    new Promise((resolve, reject) => {
+      gl.getCurrentPosition(resolve, reject, options);
     });
-  };
 
   const showMyCity = async () => {
-    const gl = window.navigator.geolocation;
     if (!gl) {
       toast.info('Geolocation is not supported by this browser.');
     } else {
@@ -48,7 +47,7 @@ export const MyLocation = () => {
         }
       }}
     >
-      <span onClick={showMyCity}>
+      <span data-testid="locate-me" onClick={showMyCity}>
         {isLocating ? (
           <LocatingLoader height={25} width={25} />
         ) : (

@@ -34,7 +34,7 @@ describe('<App />', () => {
     expect(userName).toBeInTheDocument();
     expect(userName.text).toEqual('chidimo');
 
-    await waitForElementToBeRemoved(() => screen.getByText(/Fallback/i));
+    await waitForElementToBeRemoved(() => screen.getByText(/fallback/i));
 
     expect(screen.getByRole('textbox', { name: '' })).toBeInTheDocument();
 

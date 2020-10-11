@@ -1,16 +1,24 @@
 {
   "files.autoSave": "afterDelay",
-  "editor.fontSize": 13,
+  "editor.fontSize": 14,
   "jest.pathToJest": "yarn test",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": [""],
+        "scope": [
+          ""
+        ],
         "settings": {
           "fontStyle": "italic"
         }
       }
     ]
   },
-  "workbench.preferredDarkColorTheme": "Visual Studio Dark"
+  "workbench.preferredDarkColorTheme": "Visual Studio Dark",
+  "workbench.colorTheme": "Material Theme Ocean",
+  "workbench.colorCustomizations": {
+    // "[Community Material Theme Ocean]": {
+      "titleBar.activeBackground": "#07F",
+    // }
+  }
 }

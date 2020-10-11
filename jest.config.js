@@ -4,9 +4,9 @@ module.exports = {
   verbose: true,
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx}'],
   transform: {'^.+\\.jsx?$': 'babel-jest'},
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': '<rootDir>/__mocks__/styleMock.js',
   },

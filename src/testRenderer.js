@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import * as utFuncs from '../src/utils/debounce';
 
 import { StoreProvider } from './context/StoreCtx';
 
@@ -22,7 +23,7 @@ const customRender = (ui, options) =>
 
 export * from '@testing-library/react';
 export { customRender as render };
-export { axios, userEvent };
+export { axios, userEvent, utFuncs };
 
 Wrapper.propTypes = {
   children: PropTypes.object,

@@ -41,7 +41,7 @@ class ErrorBoundary extends React.Component {
       return (
         <div className="error__boundary--parent">
           <div className="error__boundary--body">
-            <p>
+            <p role="heading">
               There was an error in loading this page.{' '}
               <span
                 style={{cursor: 'pointer', color: '#0077FF'}}
