@@ -39,7 +39,12 @@ const City = () => {
   } = currentCity.weatherInfo;
 
   const cityNotes = notes?.filter((nt) => nt.city === Name);
-  const { temperature: celcius, weather_descriptions, weather_icons } = current;
+  const {
+    temperature: celcius,
+    observation_time,
+    weather_descriptions,
+    weather_icons,
+  } = current;
 
   React.useEffect(() => {
     // I only have this in case API call fails,
@@ -109,10 +114,14 @@ const City = () => {
               })}
             </div>
             <div>
-              <p className='temp'>
+              <p className="temp">
                 {celcius} <span className="symbol">&#8451;</span> (
                 {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
               </p>
+            </div>
+
+            <div>
+              <p>Temperature reading at {observation_time}</p>
             </div>
           </div>
 

@@ -43,7 +43,7 @@ const weatherInfo = {
     weather_icons: [
       'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png',
     ],
-    weather_descriptions: [ 'Partly cloudy' ],
+    weather_descriptions: ['Partly cloudy'],
     wind_speed: 11,
     wind_degree: 310,
     wind_dir: 'NW',
@@ -61,17 +61,17 @@ const weatherInfo = {
 export default {
   get: jest.fn().mockImplementation((url) => {
     switch (url) {
-    // Enugu coordinates
-    case '/current?units=m&access_key=undefined&query=6.433,7.483':
-      return Promise.resolve({ data: weatherInfo });
-    case '/current?units=m&access_key=undefined&query=Enugu':
-      return Promise.resolve({ data: weatherInfo });
+      // Enugu coordinates
+      case '/current?units=m&access_key=undefined&query=6.433,7.483':
+        return Promise.resolve({data: weatherInfo});
+      case '/current?units=m&access_key=undefined&query=Enugu':
+        return Promise.resolve({data: weatherInfo});
       // search for Enugu
-    case '/autocomplete?units=m&access_key=undefined&query=Enugu':
-      return Promise.resolve({ data: schRes });
-    default:
-      // console.log(`UNMATCHED URL: ${url}`);
-      throw new Error(`UNMATCHED URL: ${url}`);
+      case '/autocomplete?units=m&access_key=undefined&query=Enugu':
+        return Promise.resolve({data: schRes});
+      default:
+        // console.log(`UNMATCHED URL: ${url}`);
+        throw new Error(`UNMATCHED URL: ${url}`);
     }
   }),
   defaults: {

@@ -62,16 +62,30 @@ export const reducer = (state = {}, action) => {
     if (action.data.request.type === 'LatLon') {
       locName = action.data.location.name;
     }
-    const updated = {
-      ...state,
-      weather: { ...state.weather, [locName]: action.data },
-      currentCity: {
-        ...state.currentCity,
-        weatherInfo: action.data,
-        Name: action.data.location.name,
-      },
-    };
-    store.saveState(updated);
+
+    let updated = {};
+
+    if (action.isHomePage) {
+      // don't update the current city
+      // don't update the list of cities
+      // update only the weather object
+      updated = {
+        ...state,
+        weather: { ...state.weather, [locName]: action.data },
+      };
+    } else {
+      updated = {
+        ...state,
+        currentCity: {
+          ...state.currentCity,
+          weatherInfo: action.data,
+          Name: action.data.location.name,
+        },
+        weather: { ...state.weather, [locName]: action.data },
+      };
+      store.saveState(updated);
+    }
+
     return updated;
   }
 

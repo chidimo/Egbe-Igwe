@@ -15,7 +15,7 @@ const Home = () => {
 
   React.useEffect(() => {
     cities.forEach((city) => {
-      getCityWeather(city.Name)(storeDispatch);
+      getCityWeather(city.Name, true)(storeDispatch);
     });
   }, [ cities, storeDispatch ]);
 

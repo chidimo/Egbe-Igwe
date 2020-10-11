@@ -7,7 +7,7 @@ const GP_API_KEY = process.env.REACT_APP_GPLACES_KEY;
 
 const fields = 'formatted_address,name,geometry';
 
-export const getCityWeather = (Name) => async (dispatch) => {
+export const getCityWeather = (Name, isHomePage) => async (dispatch) => {
   dispatch({ type: FCNG_CITY, isTrue: true });
   axios.defaults.baseURL = wSAPI;
 
@@ -17,7 +17,7 @@ export const getCityWeather = (Name) => async (dispatch) => {
     );
 
     if (data.current) {
-      dispatch({ type: GET_W_DATA, Name, data });
+      dispatch({ type: GET_W_DATA, Name, data, isHomePage });
     }
     dispatch({ type: FCNG_CITY, isTrue: false });
     return { success: true, data };

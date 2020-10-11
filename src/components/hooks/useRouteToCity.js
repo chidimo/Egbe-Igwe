@@ -16,8 +16,11 @@ export const useRouteToCity = () => {
       .then((res) => {
         if (res.success) {
           const { location } = res.data;
-          const { name, lat, lon } = location;
-          storeDispatch({ type: ENLIST_CITY, city: { Name: name } });
+          const { name, lat, lon, country } = location;
+          storeDispatch({
+            type: ENLIST_CITY,
+            city: { Name: name, Country: country },
+          });
 
           if (useName) {
             history.push({ pathname: `/city/${name}` });
