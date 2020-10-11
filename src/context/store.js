@@ -20,6 +20,7 @@ export const initStoreState = {
   cities: worldCities.slice(0, 15),
 
   // constructed
+  fcngCity: false,
   currentUser: { username: '', notes: [], likedCities: [] },
   currentCity: { Name: '', weatherInfo: initWeatherInfo },
 };

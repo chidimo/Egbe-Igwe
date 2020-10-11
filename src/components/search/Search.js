@@ -1,30 +1,31 @@
 import React from 'react';
-import { searchPlaces } from '../city/actions';
+import { pinpointLocation } from '../city/actions';
 import { MyLocation } from './MyLocation';
 import { SearchCard } from './SearchCard';
 
 import './search.scss';
 import { LocatingLoader } from '../AppLoaders';
 import { debounce } from '../../utils/debounce';
+import { useStoreDispatch } from '../../context/useStore';
+
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+  case 'SET_QUERY':
+    return { ...state, query: action.query };
+  case 'SET_ERROR':
+    return { ...state, error: action.error };
+  case 'SET_RESULTS':
+    return { ...state, results: action.results };
+  case 'SET_OFFLINE':
+    return { ...state, isOffline: action.isOffline };
+  case 'SET_SEARCHING':
+    return { ...state, searching: action.searching };
+  default:
+    return state;
+  }
+};
 
 export const Search = () => {
-  const reducer = (state = {}, action) => {
-    switch (action.type) {
-    case 'SET_QUERY':
-      return { ...state, query: action.query };
-    case 'SET_ERROR':
-      return { ...state, error: action.error };
-    case 'SET_RESULTS':
-      return { ...state, results: action.results };
-    case 'SET_OFFLINE':
-      return { ...state, isOffline: action.isOffline };
-    case 'SET_SEARCHING':
-      return { ...state, searching: action.searching };
-    default:
-      return state;
-    }
-  };
-
   const initState = {
     query: '',
     error: '',
@@ -34,6 +35,7 @@ export const Search = () => {
   };
 
   const [ info, dispatch ] = React.useReducer(reducer, initState);
+  const storeDispatch = useStoreDispatch();
 
   const isQuerying = info.query.length > 2;
 
@@ -56,11 +58,11 @@ export const Search = () => {
   const doSearch = React.useCallback(
     debounce((term) => {
       dispatch({ type: 'SET_SEARCHING', searching: true });
-      searchPlaces(term)
+      pinpointLocation(term)(storeDispatch)
         .then((res) => {
           dispatch({ type: 'SET_OFFLINE', isOffline: false });
           dispatch({ type: 'SET_SEARCHING', searching: false });
-          dispatch({ type: 'SET_RESULTS', results: res.candidates.slice(0, 4) });
+          dispatch({ type: 'SET_RESULTS', results: res.results.slice(0, 4) });
         })
         .catch((err) => {
           dispatch({ type: 'SET_SEARCHING', searching: false });

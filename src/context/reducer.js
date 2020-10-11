@@ -14,6 +14,7 @@ import {
   EDIT_NOTE,
   DELETE_NOTE,
   LOAD_STORE_TO_MEMORY,
+  FCNG_CITY,
 } from './aTypes';
 import { initStoreState, store, initWeatherInfo } from './store';
 
@@ -72,6 +73,10 @@ export const reducer = (state = {}, action) => {
     };
     store.saveState(updated);
     return updated;
+  }
+
+  case FCNG_CITY: {
+    return { ...state, fcngCity: action.isTrue };
   }
 
   case GET_CITY: {

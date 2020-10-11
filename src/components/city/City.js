@@ -17,6 +17,7 @@ import {
 import { useStoreDispatch, useStoreState } from '../../context/useStore';
 import { getCityWeather } from './actions';
 import { toast } from 'react-toastify';
+import { FetchingLoader } from '../AppLoaders';
 
 const City = () => {
   const history = useHistory();
@@ -26,6 +27,7 @@ const City = () => {
   const [ text, setText ] = React.useState('');
 
   const {
+    fcngCity,
     currentCity,
     currentUser: { likedCities, notes },
   } = useStoreState();
@@ -63,75 +65,83 @@ const City = () => {
   }, [ Name, coords, history, storeDispatch ]);
 
   return (
-    <div className="direct-main-child city-page">
-      <div className="city-country-name-cont">
-        <p className="page-heading">
-          {Name}, {country}{' '}
-        </p>
-        <div>
-          {likedCities.includes(Name) ? (
-            <span className="pointer">
-              <IconSet
-                name="like"
-                size={'1.7rem'}
-                onClick={() => storeDispatch({ type: UNLIKE_CITY, Name })}
-              />
-            </span>
-          ) : (
-            <span className="pointer">
-              <IconSet
-                name="unlike"
-                size={'1.7rem'}
-                onClick={() => storeDispatch({ type: LIKE_CITY, Name, country })}
-              />
-            </span>
-          )}
-        </div>
-      </div>
+    <>
+      {fcngCity ? (
+        <FetchingLoader width={50} height={50} />
+      ) : (
+        <div className="direct-main-child city-page">
+          <div className="city-country-name-cont">
+            <p role="heading" className="page-heading">
+              {Name}, {country}{' '}
+            </p>
+            <div>
+              {likedCities.includes(Name) ? (
+                <span className="pointer">
+                  <IconSet
+                    name="like"
+                    size={'1.7rem'}
+                    onClick={() => storeDispatch({ type: UNLIKE_CITY, Name })}
+                  />
+                </span>
+              ) : (
+                <span className="pointer">
+                  <IconSet
+                    name="unlike"
+                    size={'1.7rem'}
+                    onClick={() =>
+                      storeDispatch({ type: LIKE_CITY, Name, country })
+                    }
+                  />
+                </span>
+              )}
+            </div>
+          </div>
 
-      <div className="city-info">
-        <img
-          className="weather-icon"
-          src={weather_icons[0]}
-          alt="Weather icon"
-        />
-        <div>
-          {weather_descriptions.map((wd, i) => {
-            return <p key={i}>{wd}</p>;
-          })}
-        </div>
-        <div>
-          <p>
-            {celcius} <span className="symbol">&#8451;</span> (
-            {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
-          </p>
-        </div>
-      </div>
+          <div className="city-info">
+            <img
+              className="weather-icon"
+              src={weather_icons[0]}
+              alt="Weather icon"
+            />
+            <div>
+              {weather_descriptions.map((wd, i) => {
+                return <p key={i}>{wd}</p>;
+              })}
+            </div>
+            <div>
+              <p>
+                {celcius} <span className="symbol">&#8451;</span> (
+                {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
+              </p>
+            </div>
+          </div>
 
-      <div className="city-notes-list">
-        <NoteEditor
-          dataTestId={'new-note'}
-          value={text}
-          onClick={() => {
-            const { success } = saveNote(undefined, text, Name);
-            if (success) {
-              setText('');
-            }
-          }}
-          onChange={(e) => setText(e.target.value)}
-        />
+          <div className="city-notes-list">
+            <NoteEditor
+              dataTestId={'new-note'}
+              value={text}
+              onClick={() => {
+                const { success } = saveNote(undefined, text, Name);
+                if (success) {
+                  setText('');
+                }
+              }}
+              onChange={(e) => setText(e.target.value)}
+            />
 
-        {cityNotes?.length === 0 ? (
-          <p>Add your first note for {Name}</p>
-        ) : (
-          <>
-            {cityNotes?.map((n) => {
-              return <Note key={n.id} note={n} />;
-            })}
-          </>
-        )}
-      </div>
-    </div>
+            {cityNotes?.length === 0 ? (
+              <p>Add your first note for {Name}</p>
+            ) : (
+              <>
+                {cityNotes?.map((n) => {
+                  return <Note key={n.id} note={n} />;
+                })}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

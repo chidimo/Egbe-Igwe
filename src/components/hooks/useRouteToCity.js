@@ -11,14 +11,19 @@ export const useRouteToCity = () => {
   const history = useHistory();
   const storeDispatch = useStoreDispatch();
 
-  const routeToCity = (coords, setFetching) => {
-    getCityWeather(coords)(storeDispatch)
+  const routeToCity = (query, useName, setFetching) => {
+    getCityWeather(query)(storeDispatch)
       .then((res) => {
         if (res.success) {
           const { location } = res.data;
           const { name, lat, lon } = location;
           storeDispatch({ type: ENLIST_CITY, city: { Name: name } });
-          history.push({ pathname: `/city/${name}/${lat},${lon}` });
+
+          if (useName) {
+            history.push({ pathname: `/city/${name}` });
+          } else {
+            history.push({ pathname: `/city/${name}/${lat},${lon}` });
+          }
         }
       })
       .catch((err) => {

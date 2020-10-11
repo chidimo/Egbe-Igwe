@@ -27,8 +27,7 @@ export const MyLocation = () => {
         .then((position) => {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
-          const coords = `${lat},${lon}`;
-          routeToCity(coords, setLocating);
+          routeToCity(`${lat},${lon}`, false, setLocating);
         })
         .catch(() => {
           toast.error('Unable to retrieve your location at this time.');

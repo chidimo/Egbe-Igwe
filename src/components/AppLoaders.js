@@ -34,3 +34,21 @@ LocatingLoader.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
 };
+
+export const FetchingLoader = (props) => {
+  const { width, height, color } = props;
+  return (
+    <Loader
+      type="Oval"
+      width={width}
+      height={height}
+      color={color || 'royalblue'}
+    />
+  );
+};
+
+FetchingLoader.propTypes = {
+  color: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};

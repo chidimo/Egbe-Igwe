@@ -7,10 +7,7 @@ import '@testing-library/jest-dom/extend-expect';
 const mockGeolocation = {
   watchPosition: jest.fn(),
   getCurrentPosition: jest.fn().mockImplementation((success) => {
-    // if (err) {
-    //   err('Unable to locate you.');
-    // }
-    success({ coords: { latitude: 6.334986, longitude: 5.6037465 } });
+    success({ coords: { latitude: 6.433, longitude: 7.483 } });
   }),
 };
 

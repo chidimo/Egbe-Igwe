@@ -7,16 +7,11 @@ import './search.scss';
 import { useRouteToCity } from '../hooks/useRouteToCity';
 
 export const SearchCard = (props) => {
-  const [ fetching, setFetching ] = React.useState(false);
+  const { city } = props;
+  const { name, country, region } = city;
 
   const { routeToCity } = useRouteToCity();
-
-  const { city } = props;
-  const { name, formatted_address, geometry } = city;
-  const {
-    location: { lat, lng },
-  } = geometry;
-  const coords = `${lat},${lng}`;
+  const [ fetching, setFetching ] = React.useState(false);
 
   return (
     <div className="search-card pointer">
@@ -29,13 +24,15 @@ export const SearchCard = (props) => {
           onClick={() => {
             setFetching(true);
             toast.success('Location obtained. Redirecting');
-            routeToCity(coords, setFetching);
+            routeToCity(name, true, setFetching);
           }}
         >
           <p className="name" role="heading">
             {name}
           </p>
-          <p className="address">{formatted_address}</p>
+          <p className="address">
+            {region} - {country}
+          </p>
         </div>
       )}
     </div>

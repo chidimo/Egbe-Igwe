@@ -28,7 +28,7 @@ describe('LOCATION FEATURE', () => {
 
     const schInput = screen.getByTestId('locate-me');
     userEvent.click(schInput);
-    // screen.debug();
+    screen.debug();
 
     await waitForElementToBeRemoved(() => screen.getByText(/locating/i));
     expect(

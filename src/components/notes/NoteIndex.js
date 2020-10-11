@@ -10,7 +10,9 @@ const NoteIndex = () => {
 
   return (
     <div className="direct-main-child notes-page">
-      <p role='heading' className="page-heading">My notes</p>
+      <p role="heading" className="page-heading">
+        My notes
+      </p>
 
       <div>
         {notes?.length === 0 ? (

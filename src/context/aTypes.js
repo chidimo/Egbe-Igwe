@@ -4,6 +4,7 @@ export const LIKE_CITY = 'LIKE_CITY';
 export const UNLIKE_CITY = 'UNLIKE_CITY';
 
 export const GET_CITY = 'GET_CITY';
+export const FCNG_CITY = 'FCNG_CITY';
 export const CLEAN_CITY = 'CLEAN_CITY';
 export const LOAD_STORE_TO_MEMORY = 'LOAD_STORE_TO_MEMORY';
 export const ENLIST_CITY = 'ENLIST_CITY';
