@@ -23,6 +23,8 @@ View the current temperature of any city in the world.
 
 ![Laptop](img/like-sao-paulo.jpg)
 
+![My Location](img/my-city.jpg)
+
 ## For developers
 
 1. To run the project locally, clone it to your machine and run the following command
