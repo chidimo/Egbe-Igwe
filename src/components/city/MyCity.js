@@ -25,7 +25,14 @@ const MyCity = () => {
 
         <LikeACity Name={Name} />
       </div>
-      <CityBase Name={Name} />
+      <CityBase
+        Name={Name}
+        style={{
+          color: '#fff',
+          fontSize: '18px',
+          backgroundColor: 'cornflowerblue',
+        }}
+      />
     </>
   );
 };

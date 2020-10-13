@@ -23,7 +23,10 @@ const City = () => {
 
         <LikeACity Name={Name} />
       </div>
-      <CityBase Name={Name} />
+      <CityBase
+        Name={Name}
+        style={{ backgroundColor: '#f3f3f3', color: '#000' }}
+      />
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { Note } from '../notes/Note';
@@ -23,7 +24,8 @@ const getWindDir = (dir) => {
   return allDir.join('-');
 };
 
-export const CityBase = () => {
+export const CityBase = (props) => {
+  const { style } = props;
   const history = useHistory();
   const { Name } = useParams();
   const { saveNote } = useSaveNote();
@@ -76,7 +78,7 @@ export const CityBase = () => {
         <FetchingLoader width={50} height={50} />
       ) : (
         <div className="direct-main-child city-page">
-          <div className="city-info">
+          <div className="city-info" style={style}>
             <img
               className="weather-icon"
               src={weather_icons[0]}
@@ -104,7 +106,7 @@ export const CityBase = () => {
               <p className="temp">
                 Temperature: {celcius}
                 <span className="symbol">&#8451;</span> (
-                {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
+                {(celcius * 1.8 + 32).toFixed(1)}&#x2109;)
               </p>
             </div>
 
@@ -112,7 +114,7 @@ export const CityBase = () => {
               <p>
                 But it feels like {feelslike}
                 <span className="symbol">&#8451;</span> (
-                {(feelslike * 1.8 + 32).toFixed(1)} &#x2109;)
+                {(feelslike * 1.8 + 32).toFixed(1)}&#x2109;)
               </p>
             </div>
 
@@ -148,4 +150,8 @@ export const CityBase = () => {
       )}
     </>
   );
+};
+
+CityBase.propTypes = {
+  style: PropTypes.object,
 };

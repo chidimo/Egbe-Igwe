@@ -53,10 +53,11 @@ export const CityCard = (props) => {
       </div>
       <div className="city-card--3-3">
         <p className="main-temp">
-          {celcius} <span className="symbol">&#8451;</span>
+          {celcius}
+          <span className="symbol">&#8451;</span>
         </p>
         <p className="minor-temp">
-          ({(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
+          ({(celcius * 1.8 + 32).toFixed(1)}&#x2109;)
         </p>
       </div>{' '}
     </div>
