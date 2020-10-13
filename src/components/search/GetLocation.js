@@ -7,7 +7,7 @@ import { useRouteToCity } from '../hooks/useRouteToCity';
 
 import './search.scss';
 
-export const MyLocation = () => {
+export const GetLocation = () => {
   const gl = window.navigator.geolocation;
   const [ isLocating, setLocating ] = React.useState(false);
 

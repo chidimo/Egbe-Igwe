@@ -8,6 +8,7 @@ import { Error404 } from './Error404';
 
 const Home = React.lazy(() => import('../home/Home'));
 const City = React.lazy(() => import('../city/City'));
+const MyLocation = React.lazy(() => import('../city/MyLocation'));
 const NoteIndex = React.lazy(() => import('../notes/NoteIndex'));
 
 export const Routes = () => {
@@ -19,7 +20,8 @@ export const Routes = () => {
 
           <div className="main-app">
             <Switch>
-              <Route path="/city/:Name?/:coords?" component={City} />
+              <Route path="/city/:Name" component={City} />
+              <Route path="/my-location/:Name" component={MyLocation} />
               <Route path="/notes" component={NoteIndex} />
               <Route exact path="/" component={Home} />
               <Route component={Error404} />

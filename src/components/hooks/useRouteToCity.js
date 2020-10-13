@@ -16,7 +16,7 @@ export const useRouteToCity = () => {
       .then((res) => {
         if (res.success) {
           const { location } = res.data;
-          const { name, lat, lon, country } = location;
+          const { name, country } = location;
           storeDispatch({
             type: ENLIST_CITY,
             city: { Name: name, Country: country },
@@ -25,7 +25,7 @@ export const useRouteToCity = () => {
           if (useName) {
             history.push({ pathname: `/city/${name}` });
           } else {
-            history.push({ pathname: `/city/${name}/${lat},${lon}` });
+            history.push({ pathname: `/my-location/${name}` });
           }
         }
       })

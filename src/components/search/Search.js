@@ -1,6 +1,6 @@
 import React from 'react';
 import { pinpointLocation } from '../city/actions';
-import { MyLocation } from './MyLocation';
+import { GetLocation } from './GetLocation';
 import { SearchCard } from './SearchCard';
 
 import './search.scss';
@@ -116,7 +116,7 @@ export const Search = () => {
             {info.error}
           </span>
         )}
-        <MyLocation />
+        <GetLocation />
       </div>
 
       <div

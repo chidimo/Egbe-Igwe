@@ -19,7 +19,7 @@ import { getCityWeather } from './actions';
 import { toast } from 'react-toastify';
 import { FetchingLoader } from '../AppLoaders';
 
-const City = () => {
+const MyLocation = () => {
   const history = useHistory();
   const { saveNote } = useSaveNote();
   const { Name } = useParams();
@@ -73,8 +73,9 @@ const City = () => {
         <div className="direct-main-child city-page">
           <div className="city-country-name-cont">
             <p role="heading" className="page-heading">
-              {Name}, {country}{' '}
+              Current location {Name}, {country}{' '}
             </p>
+
             <div>
               {likedCities.includes(Name) ? (
                 <span className="pointer">
@@ -150,4 +151,4 @@ const City = () => {
   );
 };
 
-export default City;
+export default MyLocation;
