@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -7,7 +6,7 @@ import { useStoreState } from '../../context/useStore';
 import { CityBase } from './CityBase';
 import { LikeACity } from './LikeACity';
 
-const MyLocation = () => {
+const MyCity = () => {
   const { Name } = useParams();
   const { currentCity } = useStoreState();
 
@@ -24,11 +23,11 @@ const MyLocation = () => {
           {Name}, {country}{' '}
         </p>
 
-        <LikeACity />
+        <LikeACity Name={Name} />
       </div>
       <CityBase Name={Name} />
     </>
   );
 };
 
-export default MyLocation;
+export default MyCity;

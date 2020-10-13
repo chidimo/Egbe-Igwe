@@ -3,11 +3,15 @@ import { WA_GLOBAL } from '../utils/storeKeys';
 
 export const initWeatherInfo = {
   current: {
-    temperature: 20,
-    observation_time: '',
+    humidity: 1,
+    wind_dir: 'N',
+    feelslike: 20,
+    wind_speed: 1,
     weather_icons: [
       'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png',
     ],
+    temperature: 20,
+    observation_time: '',
     weather_descriptions: [],
   },
   location: { country: '' },

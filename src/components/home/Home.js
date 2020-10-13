@@ -28,7 +28,6 @@ const Home = () => {
         ) : (
           <>
             {cities
-
               .sort((a, b) =>
                 a.Name.localeCompare(b.Name, { sensitivity: 'base' }),
               )
@@ -38,14 +37,7 @@ const Home = () => {
               )
               .map((city, i) => {
                 const { Name } = city;
-                return (
-                  <CityCard
-                    key={i}
-                    city={city}
-                    tabIndex={5 + i}
-                    isLiked={likedCities.includes(Name)}
-                  />
-                );
+                return <CityCard key={i} Name={Name} tabIndex={5 + i} />;
               })}
           </>
         )}

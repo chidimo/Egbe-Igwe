@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './city.scss';
 import { IconSet } from '../IconSet';
 import { LIKE_CITY, UNLIKE_CITY } from '../../context/aTypes';
 import { useStoreDispatch, useStoreState } from '../../context/useStore';
 
-export const LikeACity = () => {
-  const { Name } = useParams();
+export const LikeACity = (props) => {
+  const { Name } = props;
   const storeDispatch = useStoreDispatch();
 
   const {
@@ -41,4 +40,8 @@ export const LikeACity = () => {
       )}
     </div>
   );
+};
+
+LikeACity.propTypes = {
+  Name: PropTypes.string,
 };

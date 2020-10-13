@@ -21,7 +21,7 @@ const City = () => {
           {Name}, {country}{' '}
         </p>
 
-        <LikeACity />
+        <LikeACity Name={Name} />
       </div>
       <CityBase Name={Name} />
     </>

@@ -8,13 +8,10 @@ import './city-card.scss';
 import { initWeatherData } from './data';
 import { useStoreDispatch, useStoreState } from '../../context/useStore';
 import { DELIST_CITY } from '../../context/aTypes';
+import { LikeACity } from './LikeACity';
 
 export const CityCard = (props) => {
-  const {
-    isLiked,
-    tabIndex,
-    city: { Name },
-  } = props;
+  const { tabIndex, Name } = props;
   const { weather } = useStoreState();
   const storeDispatch = useStoreDispatch();
 
@@ -35,11 +32,7 @@ export const CityCard = (props) => {
             {Name}
           </Link>
 
-          {isLiked && (
-            <span>
-              <IconSet name="like" size={'1.7rem'} />
-            </span>
-          )}
+          <LikeACity Name={Name} />
 
           <div className="close-container pointer">
             <span
@@ -71,7 +64,7 @@ export const CityCard = (props) => {
 };
 
 CityCard.propTypes = {
-  city: PropTypes.object,
+  Name: PropTypes.string,
   isLiked: PropTypes.bool,
   tabIndex: PropTypes.number,
 };

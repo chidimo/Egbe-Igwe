@@ -102,7 +102,7 @@ export const CityBase = () => {
 
             <div>
               <p className="temp">
-                Current temperature is {celcius}{' '}
+                Temperature: {celcius}
                 <span className="symbol">&#8451;</span> (
                 {(celcius * 1.8 + 32).toFixed(1)} &#x2109;)
               </p>
@@ -110,7 +110,7 @@ export const CityBase = () => {
 
             <div>
               <p>
-                But it feels like {feelslike}{' '}
+                But it feels like {feelslike}
                 <span className="symbol">&#8451;</span> (
                 {(feelslike * 1.8 + 32).toFixed(1)} &#x2109;)
               </p>
